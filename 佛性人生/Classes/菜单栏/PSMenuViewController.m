@@ -56,7 +56,7 @@
     
     UIButton *sureBtn = [[UIButton alloc]init];
     sureBtn.frame = CGRectMake(40, 20, 40, 40);
-    [sureBtn setTitle:@"yao" forState:UIControlStateNormal];
+    [sureBtn setTitle:@"back" forState:UIControlStateNormal];
     sureBtn.backgroundColor = [UIColor grayColor];
     [headView addSubview:sureBtn];
     [sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -68,12 +68,12 @@
     [titleLabel sizeToFit];
     [headView addSubview:titleLabel];
     
-    UIButton *addBtn = [[UIButton alloc]init];
-    addBtn.frame = CGRectMake(self.view.frame.size.width - 60, 20, 40, 40);
-    [addBtn setTitle:@"add" forState:UIControlStateNormal];
-    addBtn.backgroundColor = [UIColor grayColor];
-    [headView addSubview:addBtn];
-    [addBtn addTarget:self action:@selector(addBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *addBtn = [[UIButton alloc]init];
+//    addBtn.frame = CGRectMake(self.view.frame.size.width - 60, 20, 40, 40);
+//    [addBtn setTitle:@"add" forState:UIControlStateNormal];
+//    addBtn.backgroundColor = [UIColor grayColor];
+//    [headView addSubview:addBtn];
+//    [addBtn addTarget:self action:@selector(addBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     _tableView = [[UITableView alloc]init];
     _tableView.frame = CGRectMake(0, headView.frame.size.height+20,self.view.frame.size.width , 660);
@@ -81,6 +81,7 @@
     _tableView.rowHeight = 60;
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
 #pragma mark -更新TableView
@@ -107,11 +108,16 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.choseArray.count;
+    if(section == 0){
+        return self.choseArray.count;
+    }else{
+        return 1;
+    }
+    
 }
 
 /**
@@ -119,17 +125,26 @@
  具体的内容需要点进cell里面才能查看
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellID = @"textcell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    if (indexPath.section == 0) {
+        static NSString *cellID = @"textcell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        }
+        cell.editingAccessoryType = UITableViewCellAccessoryDetailButton;
+        cell.textLabel.text = self.choseArray[indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:22];
+        cell.layer.masksToBounds = YES;
+        cell.layer.cornerRadius = 10.0f;
+        cell.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:0.8];
+        return cell;
+    }else{
+        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ab"];
+        cell.imageView.image = [UIImage imageNamed:@"add"];
+        return cell;
     }
-    cell.editingAccessoryType = UITableViewCellAccessoryDetailButton;
-    cell.textLabel.text = self.choseArray[indexPath.row];
-    cell.textLabel.font = [UIFont systemFontOfSize:22];
-    cell.layer.masksToBounds = YES;
-    cell.layer.cornerRadius = 10.0f;
-    return cell;
+    
+    
 }
 #pragma mark - cell的删除
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -137,24 +152,38 @@
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView beginUpdates];
-    
-    //从数据库中删除
-    NSString *str = _choseArray[indexPath.row];
-    NSLog(@"%@",str);
-    [self deleteCelldataFromData:str];
-    //从数据源中删除
-    [_choseArray removeObjectAtIndex:indexPath.row];
-    
-    //从列表中删除
-    NSIndexPath *deleteIndex = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
-    [tableView deleteRowsAtIndexPaths:@[deleteIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-
+    if(editingStyle == UITableViewCellEditingStyleDelete){
+        //从数据库中删除
+        NSString *str = _choseArray[indexPath.row];
+        NSLog(@"%@",str);
+        [self deleteCelldataFromData:str];
+        //从数据源中删除
+        [_choseArray removeObjectAtIndex:indexPath.row];
+        
+        //从列表中删除
+        NSIndexPath *deleteIndex = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+        [tableView deleteRowsAtIndexPaths:@[deleteIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        
+       
+        //刷新转盘
+        [self.transVc refreshUILabelFormBGView];
+    }
+//    else if (editingStyle == UITableViewCellEditingStyleInsert){
+//        NSArray *insertIndexPath = [NSArray arrayWithObjects:indexPath, nil];
+//        //
+////        [self.choseArray insertObje];
+//    }
     [tableView endUpdates];
-    //刷新转盘
-    [self.transVc refreshUILabelFormBG];
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        [self addBtnClick];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }else{
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+}
 #pragma mark--按钮的点击操作
 
 /**
@@ -176,14 +205,17 @@
     }];
     UIAlertAction *sureAc = [UIAlertAction actionWithTitle:@"sure" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UITextField *conField = alertVc.textFields.firstObject;
-        [_db open];
-        [_db executeUpdate:@"INSERT INTO budda (context) VALUES (?);",conField.text];
-        [_db close];
-        //需要刷新表格
-        [self refreshUI];
+        if (conField.text.length != 0 && conField.text != NULL) {
+            [_db open];
+            [_db executeUpdate:@"INSERT INTO budda (context) VALUES (?);",conField.text];
+            [_db close];
+            //需要刷新表格
+            [self refreshUI];
+            
+            //刷新转盘
+            [self.transVc refreshUILabelFormBGView];
+        }
         
-        //刷新转盘
-        [self.transVc refreshUILabelFormBG];
         
     }];
     UIAlertAction *cancelAc = [UIAlertAction actionWithTitle:@"cancel" style:UIAlertActionStyleCancel handler:nil];
@@ -209,8 +241,6 @@
     if (result) {
         NSLog(@"database-success");
     }
-    //删除语句
-//    [_db executeUpdate:@"DELETE from budda"];
     [_db close];
     
 }

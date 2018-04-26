@@ -10,6 +10,7 @@
 #import "UIViewController+XWTransition.h"
 #import "XWCircleSpreadAnimator.h"
 #import "PSMenuViewController.h"
+#import "PSBgView.h"
 @interface PSTransController ()<CAAnimationDelegate>
 @property(nonatomic,strong)UIImageView *bgImgView;
 @property(nonatomic,strong)CADisplayLink *link;
@@ -17,6 +18,7 @@
 @property(nonatomic,strong)UIButton *menuBtn;
 @property(nonatomic,strong)NSMutableArray *turnArray;
 @property(nonatomic,strong)UIImageView *btnImgView;
+@property(nonatomic,strong)UILabel *resultLab;
 @end
 
 @implementation PSTransController
@@ -28,9 +30,20 @@
         _turnArray = [self returnResultArray];
     }
     return _turnArray;
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /**
+     用于测试代码
+     **/
+//    PSBgView *bg = [[PSBgView alloc]init];
+//    bg.frame = CGRectMake(0, 0, 50, 100);
+//    bg.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:bg];
+    
+    
+    //////
     //添加按钮
     _menuBtn  = [[UIButton alloc]init];
     _menuBtn.frame = CGRectMake(self.view.frame.size.width*0.5-20, self.view.frame.size.height-100, 40, 40);
@@ -57,17 +70,30 @@
     [backBtn setTitle:@"BACK" forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:backBtn];
+    //显示结果
+    _resultLab = [[UILabel alloc]init];
+    _resultLab.frame = CGRectMake(0, 0, 100, 30);
+    _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, self.bgImgView.frame.origin.y-30);
+    
+    _resultLab.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:_resultLab];
 }
 #pragma mark ---设置UI控件
 - (void)setAllUI{
+    
     _bgImgView = [[UIImageView alloc]init];
-    _bgImgView.frame = CGRectMake(0, 0, 286, 286);
+    _bgImgView.frame = CGRectMake(0, 0, 280, 280);
+    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:_bgImgView.bounds];
+    CAShapeLayer *pathlayer = [CAShapeLayer layer];
+    pathlayer.lineWidth = 1;
+//    pathlayer.strokeColor
+    pathlayer.path = path.CGPath;
+    _bgImgView.layer.mask = pathlayer;
     _bgImgView.image = [UIImage imageNamed:@"LuckyBaseBackground"];
     _bgImgView.center = self.view.center;
+//    _bgImgView.layer.cornerRadius = 286;
+    _bgImgView.layer.masksToBounds = YES;
     [self.view addSubview:_bgImgView];
-    
-    
-    
     _bgImgView.userInteractionEnabled = YES;
     
     //添加uilabel
@@ -76,30 +102,41 @@
     //旋转的度数   360/count
     
     for (int i = 0; i< count; i++) {
-        //        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, M_PI*CGRectGetHeight(_bgImgView.frame)/count, CGRectGetHeight(_bgImgView.frame)*3/5)];
-        UILabel *label = [[UILabel alloc]init];
-        //        label.bounds = CGRectMake(0, 0, M_PI*CGRectGetHeight(_bgImgView.frame)/count, CGRectGetHeight(_bgImgView.frame)*3/5);
+//        UILabel *label = [[UILabel alloc]init];
         //背景图的半径
-        float radius = _bgImgView.frame.size.width/2-10;
+//        float radius = _bgImgView.bounds.size.width/2;
+        float radius = _bgImgView.bounds.size.width/2+30;
         //每一个label旋转的弧度
         CGFloat angle = ((360/count)*i)/180.0*M_PI;
-        //        cosf(<#float#>);
+        
         //求出每个角度的余弦值
         //        CGFloat tank = cosf(radius*2*M_PI/count);
         //计算label的宽
         double a = 1-cos(360/count/180.0*M_PI);
-        float width = (float)sqrt(2*radius*radius*a)/2+10;
-        label.bounds = CGRectMake(0, 0, width, radius);
-        label.layer.anchorPoint = CGPointMake(0.5, 1.0);
-        label.layer.position = CGPointMake(_bgImgView.frame.size.width*0.5, _bgImgView.frame.size.height*0.5);
-        label.center = CGPointMake(CGRectGetHeight(_bgImgView.frame)/2, CGRectGetHeight(_bgImgView.frame)/2);
-        label.text = [NSString stringWithFormat:@"%@", self.turnArray[i]];
-        label.textColor = [UIColor whiteColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont boldSystemFontOfSize:14];
-        
-        label.transform = CGAffineTransformMakeRotation(angle);
-        [_bgImgView addSubview:label];
+        float width = (float)sqrt(2*radius*radius*a)+1;
+        float height = radius*cos(180/count/180.0*M_PI);
+//        label.bounds = CGRectMake(0, 0, width, radius);
+//        label.layer.anchorPoint = CGPointMake(0.5, 1.0);
+//        label.layer.position = CGPointMake(_bgImgView.frame.size.width*0.5, _bgImgView.frame.size.height*0.5);
+//        label.center = CGPointMake(CGRectGetHeight(_bgImgView.frame)/2, CGRectGetHeight(_bgImgView.frame)/2);
+//        label.text = [NSString stringWithFormat:@"%@", self.turnArray[i]];
+//        label.textColor = [UIColor whiteColor];
+//        label.textAlignment = NSTextAlignmentCenter;
+//        label.font = [UIFont boldSystemFontOfSize:14];
+//
+//        label.transform = CGAffineTransformMakeRotation(angle);
+//        [_bgImgView addSubview:label];
+        //*****测试代码
+        PSBgView *bg = [[PSBgView alloc]init];
+//        bg.backgroundColor = [UIColor redColor];
+        bg.bounds = CGRectMake(0, 0, width, height);
+        NSLog(@"----%d---%@",i,NSStringFromCGRect(bg.frame));
+        bg.layer.anchorPoint = CGPointMake(0.5, 1.0);
+        bg.layer.position = CGPointMake(_bgImgView.bounds.size.width*0.5,_bgImgView.bounds.size.height*0.5);
+        bg.center = CGPointMake(CGRectGetHeight(_bgImgView.bounds)/2, CGRectGetHeight(_bgImgView.bounds)/2);
+        bg.label.text = [NSString stringWithFormat:@"%@", self.turnArray[i]];
+        bg.transform = CGAffineTransformMakeRotation(angle);
+        [_bgImgView addSubview:bg];
     }
 }
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
@@ -133,19 +170,23 @@
    监听旋转按钮的点击
  */
 - (void)btnClick{
-    NSLog(@"%lu",(unsigned long)self.turnArray.count);
+//    NSLog(@"%lu",(unsigned long)self.turnArray.count);
     [self startRotating];
     
     //概率
     NSInteger lotteryPro = arc4random()%360;
+//    NSLog(@"随机数是----%ld",(long)lotteryPro);
     //设置转动圈数
     NSInteger circleNum = 6;
     CGFloat perAngle = M_PI/180.0;
+//    NSLog(@"perangleis------%f",perAngle);
     //核心动画
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    //KVO ----test
-        [anim addObserver:self forKeyPath:@"toValue" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    anim.toValue = [NSNumber numberWithFloat:360*perAngle*circleNum+lotteryPro*perAngle];
+    //KVO 监听核心动画转动多少弧度 ----test
+    [anim addObserver:self forKeyPath:@"toValue" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    float endAngle = 360*perAngle*circleNum+lotteryPro*perAngle;
+//    NSLog(@"最终概率是----%f",endAngle/M_PI*180);
+    anim.toValue = [NSNumber numberWithFloat:endAngle];
     
     anim.duration = 3.0f;
     anim.delegate = self;
@@ -166,6 +207,8 @@
     if([keyPath isEqualToString:@"toValue"]){
     NSLog(@"%@--%@--is changed",object,keyPath);
     NSLog(@"%@",change);
+    id newA = [change valueForKey:@"new"];
+    NSLog(@"%@",newA);
     }
 }
 
@@ -222,7 +265,7 @@
     
     //需要刷新
     self.turnArray = [self returnResultArray];
-    NSLog(@"%lu",self.turnArray.count);
+//    NSLog(@"%lu",self.turnArray.count);
     [self setAllUI];
     [self.view bringSubviewToFront:_btnImgView];
 }

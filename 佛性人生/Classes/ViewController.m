@@ -12,6 +12,7 @@
 #import "XWCoolAnimator+XWMiddlePageFlip.h"
 #import "XWCoolAnimator.h"
 #import "PSTransController.h"
+#import "PSTransViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *shakeBtn;
 - (IBAction)shakeBtnClick:(UIButton *)sender;
@@ -46,7 +47,7 @@
 }
 - (IBAction)turnBtn:(UIButton *)sender {
     XWCoolAnimator *animator = [XWCoolAnimator xw_animatorWithType:XWCoolTransitionAnimatorTypePageMiddleFlipFromTop];
-    PSTransController *transVc = [[PSTransController alloc]init];
+    PSTransViewController *transVc = [[PSTransViewController alloc]init];
     transVc.modalPresentationStyle = UIModalPresentationPageSheet;
     transVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     

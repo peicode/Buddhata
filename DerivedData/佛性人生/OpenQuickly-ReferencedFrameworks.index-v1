@@ -5,9 +5,9 @@
 	<string>XCTest</string>
 	<string>QuartzCore</string>
 	<string>sqlite3</string>
-	<string>AudioToolbox</string>
-	<string>GLKit</string>
 	<string>objc</string>
+	<string>GLKit</string>
+	<string>AudioToolbox</string>
 	<string>UIKit</string>
 	<string>Foundation</string>
 </array>

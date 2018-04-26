@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PSTransController.h"
-@class PSTransController;
+#import "PSTransViewController.h"
+@class PSTransViewController;
 @interface PSMenuViewController : UIViewController
-@property(nonatomic,weak)PSTransController *transVc;
+@property(nonatomic,weak)PSTransViewController *transVc;
 @end

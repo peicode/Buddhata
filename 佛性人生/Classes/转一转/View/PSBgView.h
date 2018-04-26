@@ -12,4 +12,5 @@
 
 @property(nonatomic,strong)UIImageView *bgImgView;
 @property(nonatomic,strong)NSMutableArray *turnArray;
+@property(nonatomic,strong)UILabel *label;
 @end
