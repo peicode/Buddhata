@@ -81,8 +81,15 @@
     _tableView.rowHeight = 60;
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 0)];
+//    UIView *fview = [UIView new];
+//    self.tableView.backgroundColor = [UIColor clearColor];
+//    [self.tableView setTableFooterView:fview];
+    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_tableView];
+    
+    
 }
 #pragma mark -更新TableView
 -(void)refreshUI{
@@ -112,11 +119,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
     if(section == 0){
         return self.choseArray.count;
     }else{
         return 1;
     }
+    
     
 }
 
@@ -134,9 +143,9 @@
         cell.editingAccessoryType = UITableViewCellAccessoryDetailButton;
         cell.textLabel.text = self.choseArray[indexPath.row];
         cell.textLabel.font = [UIFont systemFontOfSize:22];
-        cell.layer.masksToBounds = YES;
-        cell.layer.cornerRadius = 10.0f;
-        cell.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:0.8];
+//        cell.layer.masksToBounds = YES;
+//        cell.layer.cornerRadius = 10.0f;
+//        cell.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:0.8];
         return cell;
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ab"];

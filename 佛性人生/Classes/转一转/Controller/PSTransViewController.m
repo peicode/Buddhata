@@ -12,11 +12,12 @@
 #import "PSMenuViewController.h"
 #import "PSBgView.h"
 #import "PSImgBgView.h"
-@interface PSTransViewController ()<CAAnimationDelegate>
+@interface PSTransViewController ()<CAAnimationDelegate,PSImgDelegate>
 @property(nonatomic,strong)PSImgBgView *bgView;
 @property(nonatomic,strong)UIButton *menuBtn;
 @property(nonatomic,strong)UILabel *resultLab;
 @property(nonatomic,strong)NSMutableArray *turnArray;
+@property(nonatomic,strong)UIImageView *BGImageView;
 @end
 
 @implementation PSTransViewController
@@ -28,42 +29,40 @@
         _turnArray = [self returnResultArray];
     }
     return _turnArray;
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _BGImageView = [[UIImageView alloc]init];
+    _BGImageView.frame = CGRectMake(0, 0, PSSCREENW, PSSCREENH);
+    _BGImageView.image = [UIImage imageNamed:@"bgTurn"];
+    [self.view addSubview:_BGImageView];
     [self setupMainUI];
     [self setupOtherUI];
-    
-    
-    
 }
+/**
+ 转盘界面 (添加转盘上的组件)
+ */
 -(void)setupMainUI{
     _bgView = [[PSImgBgView alloc]init];
     _bgView.frame = CGRectMake(0, 0, 286, 286);
     _bgView.center = self.view.center;
+    _bgView.delegete = self;
     [self.view addSubview:_bgView];
-    
     //添加uilabel
     //获取转盘上所需总数
         int count = (int)self.turnArray.count;
-//    int count = 5;
     //旋转的度数   360/count
-    
     for (int i = 0; i< count; i++) {
-        //        UILabel *label = [[UILabel alloc]init];
         //背景图的半径
         //        float radius = _bgImgView.bounds.size.width/2;
         float radius = self.bgView.iconView.bounds.size.width/2+30;
         //每一个label旋转的弧度
-        CGFloat angle = ((360/count)*i)/180.0*M_PI;
-        
+        CGFloat angle = ((360.0/count)*i)/180.0*M_PI;
         //求出每个角度的余弦值
-        //        CGFloat tank = cosf(radius*2*M_PI/count);
         //计算label的宽
-        double a = 1-cos(360/count/180.0*M_PI);
-        float width = (float)sqrt(2*radius*radius*a)+1;
-        float height = radius*cos(180/count/180.0*M_PI);
+        double a = 1-cos(360.0/count/180.0*M_PI);
+        float width = (float)sqrt(2*radius*radius*a);
+        float height = radius*cos(180.0/count/180.0*M_PI);
         //*****测试代码
         PSBgView *bg = [[PSBgView alloc]init];
         //        bg.backgroundColor = [UIColor redColor];
@@ -78,27 +77,27 @@
     }
 }
 -(void)setupOtherUI{
-    //添加按钮
+    //菜单
     _menuBtn  = [[UIButton alloc]init];
-    _menuBtn.frame = CGRectMake(self.view.frame.size.width*0.5-20, self.view.frame.size.height-100, 40, 40);
-    _menuBtn.layer.masksToBounds = YES;
-    _menuBtn.layer.cornerRadius = 20;
-    [_menuBtn setTitle:@"菜单" forState:UIControlStateNormal];
-    _menuBtn.backgroundColor = [UIColor grayColor];
+    _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+    [_menuBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [self.view addSubview:_menuBtn];
     [_menuBtn addTarget:self action:@selector(menuBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     //返回按钮
-    UIButton *backBtn  = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,100 , 100, 40)];
-    [backBtn setTitle:@"BACK" forState:UIControlStateNormal];
+    UIButton *backBtn  = [[UIButton alloc]initWithFrame:CGRectMake(12, 29, 14, 24)];
+//    [backBtn setTitle:@"BACK" forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:backBtn];
     //显示结果
     _resultLab = [[UILabel alloc]init];
-    _resultLab.frame = CGRectMake(0, 0, 100, 30);
+    _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 35);
     _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, self.bgView.frame.origin.y-30);
-    
-    _resultLab.backgroundColor = [UIColor yellowColor];
+    _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
+    _resultLab.textColor = [UIColor whiteColor];
+    _resultLab.textAlignment = NSTextAlignmentCenter;
+//    _resultLab.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:_resultLab];
 }
 /**
@@ -153,6 +152,33 @@
     //需要刷新
     self.turnArray = [self returnResultArray];
     [self setupMainUI];
+}
+
+/**
+ 这里显示结果
+ */
+-(void)sendRandomAngle:(float)angle1{
+    int count = (int)self.turnArray.count;
+    float a = 360.0/count;
+    a = a/2;
+    float angle = angle1;
+    NSLog(@"%f",angle);
+    int b = angle/a;
+    int c = (int)angle%(int)a;
+    NSLog(@"%d",b);
+    NSLog(@"%d",c);
+    if (angle<a) {
+        self.resultLab.text = self.turnArray[0];
+    }else{
+        if (c == 0) {
+            self.resultLab.text = self.turnArray[count-b/2];
+        }else{
+            self.resultLab.text = self.turnArray[count-b/2-1];
+        }
+    }
+    
+    
+    
 }
 @end
 

@@ -12,6 +12,9 @@
         <array key="HiraginoMaruGothProN.ttc">
             <string>HiraMaruProN-W4</string>
         </array>
+        <array key="comic.otf">
+            <string>MFLiHei_Noncommercial-Regular</string>
+        </array>
     </customFonts>
     <scenes>
         <!--View Controller-->
@@ -22,13 +25,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtK-XJ-Xpt">
-                                <rect key="frame" x="-1" y="0.0" width="414" height="373"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtK-XJ-Xpt">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="368"/>
                                 <color key="backgroundColor" red="1" green="0.59776903219999999" blue="0.59901243230000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="41"/>
-                                <state key="normal" title="摇一摇">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="MFLiHei_Noncommercial-Regular" family="MF LiHei (Noncommercial)" pointSize="57"/>
+                                <state key="normal" backgroundImage="shake">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="1" green="0.59776903219999999" blue="0.59901243230000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -36,11 +38,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uQr-Oe-89e">
-                                <rect key="frame" x="0.0" y="371" width="414" height="365"/>
+                                <rect key="frame" x="0.0" y="368" width="414" height="368"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.70109049479166663" blue="0.59901243230000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="41"/>
-                                <state key="normal" title="转一转">
+                                <state key="normal" backgroundImage="turn">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
@@ -49,6 +51,11 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.27159288194444442" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wtK-XJ-Xpt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2Qa-I8-Niz"/>
+                            <constraint firstItem="wtK-XJ-Xpt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EH1-u0-yfQ"/>
+                            <constraint firstItem="wtK-XJ-Xpt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="EMW-rZ-rC5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
@@ -61,4 +68,8 @@
             <point key="canvasLocation" x="-143.47826086956522" y="138.58695652173915"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="shake" width="414" height="368"/>
+        <image name="turn" width="414" height="367"/>
+    </resources>
 </document>

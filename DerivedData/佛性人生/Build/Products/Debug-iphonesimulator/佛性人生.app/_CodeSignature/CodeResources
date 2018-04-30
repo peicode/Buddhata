@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		aYRhdaAjr4jxnDENoUJ+graA3pA=
+		oZ1dP5uk+FmZ/MtykUtx8RVZf/U=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		s4RE4gGWZL2mlp4R4PUje7TPipc=
+		K0Go1vn8xMkDTMVo1earowKKx+c=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -18,11 +18,11 @@
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		7LhmwesExqiER2iIudIMjnI7Ydw=
+		lXbf0QxneNI4E6fy0pCQ1+l1Y3Q=
 		</data>
 		<key>Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib</key>
 		<data>
-		6vTWZ1cMMy/LVg8BKylDcYJSIfA=
+		EhDZNwgT88bapx5tTg0O0dwJv+M=
 		</data>
 		<key>Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
@@ -30,15 +30,19 @@
 		</data>
 		<key>Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib</key>
 		<data>
-		ywSkgmLoE0atKVxdfU5X+iL+JnM=
+		7M4pAQIiABWn17l4On1kZZSnCL8=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		5RcM4H3Od/owF261uY/tZj0bEzs=
+		IxVgDNLjNpLs/moVtIoArupKtQw=
 		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>comic.otf</key>
+		<data>
+		xe0wPCn09p+/oJ92v+S48UTRsu8=
 		</data>
 		<key>shake_begin.wav</key>
 		<data>
@@ -55,22 +59,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aYRhdaAjr4jxnDENoUJ+graA3pA=
+			oZ1dP5uk+FmZ/MtykUtx8RVZf/U=
 			</data>
 			<key>hash2</key>
 			<data>
-			GgzzNHL2yO6Q96kgEpA04KTemzbmhWOHNCgjQ4tagSk=
+			H+YTMzdvAowfm9bJPrWl+UL67bzK26N/5geso/bo+ns=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			s4RE4gGWZL2mlp4R4PUje7TPipc=
+			K0Go1vn8xMkDTMVo1earowKKx+c=
 			</data>
 			<key>hash2</key>
 			<data>
-			2EQKjTyH4E9Nrgumrhj/MIocnKEq5zvG6q4se9qbjyg=
+			qxOVw86NyRIe79tVN0CvWpfrJO16k50U5nO5FMGocuY=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
@@ -88,22 +92,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7LhmwesExqiER2iIudIMjnI7Ydw=
+			lXbf0QxneNI4E6fy0pCQ1+l1Y3Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			TS1e+0h3FsOYRmR+bo9iGJNXKxQpdTSYmBKc+O8e8Ac=
+			FAAJI5vuwuwj6xtzGFX2+3wgcbuA7fwHEfK9cfINS/I=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6vTWZ1cMMy/LVg8BKylDcYJSIfA=
+			EhDZNwgT88bapx5tTg0O0dwJv+M=
 			</data>
 			<key>hash2</key>
 			<data>
-			K3TTVsD9hcnjq9C+EkGzCHU+dj4WiAuZ/iVWIluV6hg=
+			ktc0mQpkpzwoMKEUJ94A9u8qNtHDG3SbXs5kvSKyugs=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/Info.plist</key>
@@ -121,11 +125,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ywSkgmLoE0atKVxdfU5X+iL+JnM=
+			7M4pAQIiABWn17l4On1kZZSnCL8=
 			</data>
 			<key>hash2</key>
 			<data>
-			m9MBe+p5Z+pTPz8Rq1GVJkmarxxWfLhlzgwLH7AkIAA=
+			cscX7liWCHbPRY+Ww4mjgvtwY+2ySsXe1CZ20JQlcL0=
+			</data>
+		</dict>
+		<key>comic.otf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xe0wPCn09p+/oJ92v+S48UTRsu8=
+			</data>
+			<key>hash2</key>
+			<data>
+			bwmRtrxcAgV296hdwOUJ4fzeGdu64OUXM56iWSDpLL8=
 			</data>
 		</dict>
 		<key>shake_begin.wav</key>

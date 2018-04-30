@@ -16,9 +16,11 @@
 @property(nonatomic,assign)SystemSoundID soundBeginID;
 @property(nonatomic,assign)SystemSoundID soundEndID;
 @property(nonatomic,strong)UIButton *menuBtn;
+@property(nonatomic,strong)UIButton *backBtn;
 @property(nonatomic,strong)UILabel *textLab;
 @property(nonatomic,strong)NSMutableArray *mulArray;
 @property(nonatomic,strong)UIImageView *bgView;
+@property(nonatomic,strong)UIImageView *headView;
 @end
 
 @implementation PSShakeViewController
@@ -63,26 +65,36 @@
     [self becomeFirstResponder];
     //设置背景以及相关组件
     [self setAllSubViews];
-    
+//    NSArray *fontFamilies = [UIFont familyNames];
+//    for (int i = 0; i < [fontFamilies count]; i++)
+//    {
+//        NSString *fontFamily = [fontFamilies objectAtIndex:i];
+//        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
+//        NSLog (@"%@: %@", fontFamily, fontNames);
+//    }
+//    2018-04-30 11:15:53.620750+0800 佛性人生[38442:35506412] MF LiHei (Noncommercial): (
+//                                                                                    "MFLiHei_Noncommercial-Regular"
+//                                                                                    )
 }
 - (void)setAllSubViews{
     _bgView = [[UIImageView alloc]init];
     _bgView.frame = self.view.frame;
     _bgView.userInteractionEnabled = YES;
     _bgView.contentMode = UIViewContentModeScaleToFill;
-    _bgView.image = [UIImage imageNamed:@"bgfo2"];
+    _bgView.image = [UIImage imageNamed:@"bgShake"];
     [self.view addSubview:_bgView];
-    
-    
+    //菜单
     _menuBtn  = [[UIButton alloc]init];
-    _menuBtn.frame = CGRectMake(self.view.frame.size.width*0.5-20, self.view.frame.size.height*0.5+200, 40, 40);
-    _menuBtn.layer.masksToBounds = YES;
-    _menuBtn.layer.cornerRadius = 20;
-    [_menuBtn setTitle:@"菜单" forState:UIControlStateNormal];
-    _menuBtn.backgroundColor = [UIColor grayColor];
+    _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+    [_menuBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [_bgView addSubview:_menuBtn];
     [_menuBtn addTarget:self action:@selector(menuBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    
+    //返回
+    _backBtn = [[UIButton alloc]init];
+    _backBtn.frame = CGRectMake(12, 29, 14, 24);
+    [_backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
+    [_bgView addSubview:_backBtn];
+    [_backBtn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
     //添加Label
     
     
@@ -90,10 +102,11 @@
     _textLab = [[UILabel alloc]init];
 //    _textLab.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     _textLab.textAlignment = NSTextAlignmentCenter;
-    _textLab.frame = CGRectMake(self.view.frame.size.width/2-100, self.view.frame.size.height/2-25, 200, 50);
-    _textLab.font = [UIFont fontWithName:@"Hiragino Maru Gothic ProN" size:40];
+    _textLab.frame = CGRectMake(0 , 82, self.view.frame.size.width, 50);
+    _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
     _textLab.textColor = [UIColor whiteColor];
-    
+    _textLab.text = @"施主，请摇晃你的手机";
+    _textLab.textAlignment = NSTextAlignmentCenter;
     [_bgView addSubview:_textLab];
     
 }
@@ -113,9 +126,55 @@
 #pragma mark -摇一摇相关方法
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     if(motion == UIEventSubtypeMotionShake){
-        //这时候要重新加载一下数据库数据
-        //1.添加动画
         
+        //1.添加动画
+        _headView = [[UIImageView alloc]init];
+        _headView.frame = CGRectMake(100, 179, 179, 259);
+        _headView.image = [UIImage imageNamed:@"head"];
+        [self.view addSubview:_headView];
+//        _headView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+        CABasicAnimation *swingAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        swingAnimation.duration = 0.5;
+        CAMediaTimingFunction *mediaTiming = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        swingAnimation.timingFunction = mediaTiming;
+        swingAnimation.repeatCount = 4.0;
+        float fvalue = -M_PI/10.0;
+        float evalue = M_PI/10.0;
+        swingAnimation.fromValue = [NSNumber numberWithDouble:fvalue];
+        swingAnimation.toValue = [NSNumber numberWithDouble:evalue];
+        swingAnimation.autoreverses = YES;
+        
+        [_headView.layer addAnimation:swingAnimation forKey:nil];
+        // 晃动次数
+//        static int numberOfShakes = 4;
+//        // 晃动幅度（相对于总宽度）
+//        static float vigourOfShake = 0.04f;
+//        // 晃动延续时常（秒）
+//        static float durationOfShake = 0.5f;
+//
+//        CAKeyframeAnimation *shakeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+//        //关键帧（点）
+//        CGPoint layerPosition = CGPointMake(190, 330);
+//
+//        // 起始点
+//        NSValue *value1=[NSValue valueWithCGPoint:CGPointMake(190, 330)];
+//        // 关键点数组
+//        NSMutableArray *values = [[NSMutableArray alloc] initWithObjects:value1, nil];
+//        for (int i = 0; i<numberOfShakes; i++) {
+//            // 左右晃动的点
+//            NSValue *valueLeft = [NSValue valueWithCGPoint:CGPointMake(layerPosition.x-self.view.frame.size.width*vigourOfShake*(1-(float)i/numberOfShakes), layerPosition.y)];
+//            NSValue *valueRight = [NSValue valueWithCGPoint:CGPointMake(layerPosition.x+self.view.frame.size.width*vigourOfShake*(1-(float)i/numberOfShakes), layerPosition.y)];
+//
+//            [values addObject:valueLeft];
+//            [values addObject:valueRight];
+//        }
+//        // 最后回归到起始点
+//        [values addObject:value1];
+//
+//        shakeAnimation.values = values;
+//        shakeAnimation.duration = durationOfShake;
+//
+//        [head.layer addAnimation:shakeAnimation forKey:kCATransition];
         //2.添加摇动声音
 //        AudioServicesPlaySystemSound(self.soundBeginID);
         
@@ -129,8 +188,10 @@
 }
 -(void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     
+    NSLog(@"%@",NSStringFromCGRect(_headView.frame));
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSLog(@"结束摇动");
+        
         //需要判断 是否有数据 ，如果没有 需要提示
         self.mulArray = [self returnResultArray];
         if(self.mulArray.count == 0){
@@ -146,15 +207,7 @@
         //2.添加摇动声音
 //        AudioServicesPlaySystemSound(self.soundEndID);
         //3.显示结果
-        //显示背景图   需要 逐渐显示  出来
-        int l = arc4random() % 3;
-        NSString *imgName = [NSString stringWithFormat:@"bg%d",l];
-        [UIView animateWithDuration:1.0 animations:^{
-            
-            _bgView.image = [UIImage imageNamed:imgName];
-        }];
-        
-
+        _bgView.image = [UIImage imageNamed:@"bgShake"];
 //        NSLog(@"%lu",(unsigned long)self.mulArray.count);
         int count = (int)self.mulArray.count;
         int i = arc4random() % count;
@@ -164,7 +217,7 @@
     });
     
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+-(void)backButtonClick{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -14,10 +14,6 @@
 -(void)layoutSubviews{
     
     _label.frame = CGRectMake(0, 10, self.bounds.size.width, 20);
-    
-//    NSLog(@"%@",NSStringFromCGRect(self.label.frame) );
-    
-    
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -31,7 +27,6 @@
     return self;
 }
 -(void)drawRect:(CGRect)rect{
-//    CGContextRef ref =
     UIColor *color = [UIColor whiteColor];
     [color set];//设置线条颜色
     UIBezierPath *path = [UIBezierPath bezierPath];

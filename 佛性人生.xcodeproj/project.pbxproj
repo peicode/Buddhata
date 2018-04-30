@@ -35,6 +35,7 @@
 		FCD575CA20885BAF00E51867 /* PSBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575C920885BAF00E51867 /* PSBgView.m */; };
 		FCD5760920915D9A00E51867 /* PSImgBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5760820915D9100E51867 /* PSImgBgView.m */; };
 		FCD5760C2091662900E51867 /* PSTransViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5760B2091662900E51867 /* PSTransViewController.m */; };
+		FCD576112096BEC800E51867 /* comic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FCD576102096BE2B00E51867 /* comic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,7 @@
 		FCD5760820915D9100E51867 /* PSImgBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSImgBgView.m; sourceTree = "<group>"; };
 		FCD5760A2091662900E51867 /* PSTransViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTransViewController.h; sourceTree = "<group>"; };
 		FCD5760B2091662900E51867 /* PSTransViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTransViewController.m; sourceTree = "<group>"; };
+		FCD576102096BE2B00E51867 /* comic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 		FC01C64B20744DEB009E43B9 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				FCD576102096BE2B00E51867 /* comic.otf */,
 				FC01C64E20745589009E43B9 /* 音效 */,
 			);
 			path = Others;
@@ -572,6 +575,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD576112096BEC800E51867 /* comic.otf in Resources */,
 				FC01C65120745A54009E43B9 /* shake_begin.wav in Resources */,
 				FC01C65220745A54009E43B9 /* shake_end.wav in Resources */,
 				FC01C62220744D44009E43B9 /* LaunchScreen.storyboard in Resources */,

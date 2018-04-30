@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol PSImgDelegate<NSObject>
+@optional
+-(void)sendRandomAngle: (float )angle;
+@end
 @interface PSImgBgView : UIView<CAAnimationDelegate>
 @property(nonatomic,strong)UIImageView *iconView;
 @property(nonatomic,strong)UIImageView *btnView;
 @property(nonatomic,strong)CADisplayLink *link;
 @property(nonatomic,strong)CABasicAnimation *anim;
-
-//static CGFloat const *WIDTH = self.frame.size.width;
-//static CGFloat const *HEIGHT = self.frame.size.height;
+@property(nonatomic,assign)float endAngle;
+@property(nonatomic,weak)id<PSImgDelegate> delegete;
 @end

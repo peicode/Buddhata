@@ -102,7 +102,6 @@
     //旋转的度数   360/count
     
     for (int i = 0; i< count; i++) {
-//        UILabel *label = [[UILabel alloc]init];
         //背景图的半径
 //        float radius = _bgImgView.bounds.size.width/2;
         float radius = _bgImgView.bounds.size.width/2+30;
@@ -115,17 +114,6 @@
         double a = 1-cos(360/count/180.0*M_PI);
         float width = (float)sqrt(2*radius*radius*a)+1;
         float height = radius*cos(180/count/180.0*M_PI);
-//        label.bounds = CGRectMake(0, 0, width, radius);
-//        label.layer.anchorPoint = CGPointMake(0.5, 1.0);
-//        label.layer.position = CGPointMake(_bgImgView.frame.size.width*0.5, _bgImgView.frame.size.height*0.5);
-//        label.center = CGPointMake(CGRectGetHeight(_bgImgView.frame)/2, CGRectGetHeight(_bgImgView.frame)/2);
-//        label.text = [NSString stringWithFormat:@"%@", self.turnArray[i]];
-//        label.textColor = [UIColor whiteColor];
-//        label.textAlignment = NSTextAlignmentCenter;
-//        label.font = [UIFont boldSystemFontOfSize:14];
-//
-//        label.transform = CGAffineTransformMakeRotation(angle);
-//        [_bgImgView addSubview:label];
         //*****测试代码
         PSBgView *bg = [[PSBgView alloc]init];
 //        bg.backgroundColor = [UIColor redColor];
@@ -269,37 +257,5 @@
     [self setAllUI];
     [self.view bringSubviewToFront:_btnImgView];
 }
--(void)setLabels{
-    //添加uilabel
-    //获取转盘上所需总数
-    int count = (int)self.turnArray.count;
-    //旋转的度数   360/count
-    
-    for (int i = 0; i< count; i++) {
-        //        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, M_PI*CGRectGetHeight(_bgImgView.frame)/count, CGRectGetHeight(_bgImgView.frame)*3/5)];
-        UILabel *label = [[UILabel alloc]init];
-        //        label.bounds = CGRectMake(0, 0, M_PI*CGRectGetHeight(_bgImgView.frame)/count, CGRectGetHeight(_bgImgView.frame)*3/5);
-        //背景图的半径
-        float radius = _bgImgView.frame.size.width/2-10;
-        //每一个label旋转的弧度
-        CGFloat angle = ((360/count)*i)/180.0*M_PI;
-        //        cosf(<#float#>);
-        //求出每个角度的余弦值
-        //        CGFloat tank = cosf(radius*2*M_PI/count);
-        //计算label的宽
-        double a = 1-cos(360/count/180.0*M_PI);
-        float width = (float)sqrt(2*radius*radius*a)/2+10;
-        label.bounds = CGRectMake(0, 0, width, radius);
-        label.layer.anchorPoint = CGPointMake(0.5, 1.0);
-        label.layer.position = CGPointMake(_bgImgView.frame.size.width*0.5, _bgImgView.frame.size.height*0.5);
-        label.center = CGPointMake(CGRectGetHeight(_bgImgView.frame)/2, CGRectGetHeight(_bgImgView.frame)/2);
-        label.text = [NSString stringWithFormat:@"%@", self.turnArray[i]];
-        label.textColor = [UIColor whiteColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont boldSystemFontOfSize:14];
-        
-        label.transform = CGAffineTransformMakeRotation(angle);
-        [_bgImgView addSubview:label];
-    }
-}
+
 @end

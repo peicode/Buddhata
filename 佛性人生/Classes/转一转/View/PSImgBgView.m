@@ -29,7 +29,7 @@
         //设置按钮的图片
         _btnView.frame = CGRectMake(self.bounds.size.width/2-81, self.bounds.size.height/2-81, 81, 81);
         _btnView.center = _iconView.center;
-        _btnView.image = [UIImage imageNamed:@"sure"];
+        _btnView.image = [UIImage imageNamed:@"strat"];
         [self addSubview:_iconView];
         [self addSubview:_btnView];
         
@@ -38,7 +38,7 @@
     return self;
 }
 - (void)drawRect:(CGRect)rect {
-    //画圆
+    //画圆 截出圆形layer
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
     CAShapeLayer *pathlayer = [CAShapeLayer layer];
     pathlayer.lineWidth = 1;
@@ -47,18 +47,13 @@
     self.layer.masksToBounds = YES;
     
 }
-
-
 /**
  监听旋转按钮的点击
  */
 - (void)btnClick{
-    //    NSLog(@"%lu",(unsigned long)self.turnArray.count);
     [self startRotating];
-    
-    //概率
-    NSInteger lotteryPro = arc4random()%360;
-    //    NSLog(@"随机数是----%ld",(long)lotteryPro);
+    //概率 创造一个随机数（0，360）arc4random()%360
+    float lotteryPro = 40+arc4random()%320;
     //设置转动圈数
     NSInteger circleNum = 6;
     CGFloat perAngle = M_PI/180.0;
@@ -66,10 +61,10 @@
     //核心动画
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
     //KVO 监听核心动画转动多少弧度 ----test
-    [anim addObserver:self forKeyPath:@"toValue" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    float endAngle = 360*perAngle*circleNum+lotteryPro*perAngle;
+//    [anim addObserver:self forKeyPath:@"toValue" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    self.endAngle = 360*perAngle*circleNum+lotteryPro*perAngle;
     //    NSLog(@"最终概率是----%f",endAngle/M_PI*180);
-    anim.toValue = [NSNumber numberWithFloat:endAngle];
+    anim.toValue = [NSNumber numberWithFloat:self.endAngle];
     
     anim.duration = 3.0f;
     anim.delegate = self;
@@ -81,9 +76,12 @@
     anim.removedOnCompletion = NO;
     self.anim = anim;
     
-    //    [NSNotificationCenter defaultCente;r] add;
     //
     [self.iconView.layer addAnimation:anim forKey:@"rotation"];
+    [self.iconView.layer addObserver:self forKeyPath:@"transform" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    if (self.delegete && [self.delegete respondsToSelector:@selector(sendRandomAngle:)]) {
+        [self.delegete sendRandomAngle:lotteryPro];
+    }
 }
 /**
  开始旋转  屏幕刷新率相同的频率将内容画到屏幕上的定时器。
@@ -116,9 +114,17 @@
     if([keyPath isEqualToString:@"toValue"]){
 //        NSLog(@"%@--%@--is changed",object,keyPath);
 //        NSLog(@"%@",change);
-        id newA = [change valueForKey:@"new"];
+//        id newA = [change valueForKey:@"new"];
 //        NSLog(@"%@",newA);
+    }else if ([keyPath isEqualToString:@"transform"]){
+//        NSLog(@"%@",change);
+        CATransform3D *new = (__bridge CATransform3D*)[change valueForKey:@"new"];
+//        CATransform3D old = ()[change valueForKey:@"old"];
+//        NSLog(@"%f",new->m22);
+//        CATransform3DGetAffineTransform(CATransform3D t)
     }
 }
-
+-(void)dealloc{
+    [self.anim removeObserver:self forKeyPath:@"toValue"];
+}
 @end
