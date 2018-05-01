@@ -11,7 +11,6 @@
 #import "UIViewController+XWTransition.h"
 #import "XWCoolAnimator+XWMiddlePageFlip.h"
 #import "XWCoolAnimator.h"
-#import "PSTransController.h"
 #import "PSTransViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *shakeBtn;

@@ -121,7 +121,6 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 #pragma mark -摇一摇相关方法
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
@@ -145,36 +144,6 @@
         swingAnimation.autoreverses = YES;
         
         [_headView.layer addAnimation:swingAnimation forKey:nil];
-        // 晃动次数
-//        static int numberOfShakes = 4;
-//        // 晃动幅度（相对于总宽度）
-//        static float vigourOfShake = 0.04f;
-//        // 晃动延续时常（秒）
-//        static float durationOfShake = 0.5f;
-//
-//        CAKeyframeAnimation *shakeAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-//        //关键帧（点）
-//        CGPoint layerPosition = CGPointMake(190, 330);
-//
-//        // 起始点
-//        NSValue *value1=[NSValue valueWithCGPoint:CGPointMake(190, 330)];
-//        // 关键点数组
-//        NSMutableArray *values = [[NSMutableArray alloc] initWithObjects:value1, nil];
-//        for (int i = 0; i<numberOfShakes; i++) {
-//            // 左右晃动的点
-//            NSValue *valueLeft = [NSValue valueWithCGPoint:CGPointMake(layerPosition.x-self.view.frame.size.width*vigourOfShake*(1-(float)i/numberOfShakes), layerPosition.y)];
-//            NSValue *valueRight = [NSValue valueWithCGPoint:CGPointMake(layerPosition.x+self.view.frame.size.width*vigourOfShake*(1-(float)i/numberOfShakes), layerPosition.y)];
-//
-//            [values addObject:valueLeft];
-//            [values addObject:valueRight];
-//        }
-//        // 最后回归到起始点
-//        [values addObject:value1];
-//
-//        shakeAnimation.values = values;
-//        shakeAnimation.duration = durationOfShake;
-//
-//        [head.layer addAnimation:shakeAnimation forKey:kCATransition];
         //2.添加摇动声音
 //        AudioServicesPlaySystemSound(self.soundBeginID);
         
@@ -191,7 +160,7 @@
     NSLog(@"%@",NSStringFromCGRect(_headView.frame));
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSLog(@"结束摇动");
-        
+        [self.headView removeFromSuperview];
         //需要判断 是否有数据 ，如果没有 需要提示
         self.mulArray = [self returnResultArray];
         if(self.mulArray.count == 0){

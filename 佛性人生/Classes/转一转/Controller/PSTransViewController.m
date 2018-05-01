@@ -55,7 +55,8 @@
     for (int i = 0; i< count; i++) {
         //背景图的半径
         //        float radius = _bgImgView.bounds.size.width/2;
-        float radius = self.bgView.iconView.bounds.size.width/2+30;
+//        float radius = self.bgView.iconView.bounds.size.width/2+30;
+        float radius = self.bgView.iconView.bounds.size.width;
         //每一个label旋转的弧度
         CGFloat angle = ((360.0/count)*i)/180.0*M_PI;
         //求出每个角度的余弦值
@@ -93,8 +94,9 @@
     //显示结果
     _resultLab = [[UILabel alloc]init];
     _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 35);
-    _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, self.bgView.frame.origin.y-30);
+    _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 82);
     _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
+    _resultLab.text = @"施主，请点击开始";
     _resultLab.textColor = [UIColor whiteColor];
     _resultLab.textAlignment = NSTextAlignmentCenter;
 //    _resultLab.backgroundColor = [UIColor yellowColor];
@@ -153,30 +155,42 @@
     self.turnArray = [self returnResultArray];
     [self setupMainUI];
 }
-
+-(void)judgeArrayNull{
+    if (self.turnArray.count == 0) {
+        //提示用户要去添加
+        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"还没选项" message:@"快去添加吧！" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertVc animated:YES completion:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+        return;
+    }
+}
 /**
  这里显示结果
  */
 -(void)sendRandomAngle:(float)angle1{
+    
     int count = (int)self.turnArray.count;
     float a = 360.0/count;
-    a = a/2;
+    float d = a/2;
     float angle = angle1;
     NSLog(@"%f",angle);
-    int b = angle/a;
-    int c = (int)angle%(int)a;
-    NSLog(@"%d",b);
-    NSLog(@"%d",c);
-    if (angle<a) {
+
+    if (angle<=d || angle>=360-d) {
         self.resultLab.text = self.turnArray[0];
     }else{
+        int b = angle/d;
+        int c = (int)angle%(int)d;
         if (c == 0) {
             self.resultLab.text = self.turnArray[count-b/2];
         }else{
-            self.resultLab.text = self.turnArray[count-b/2-1];
+
+            b++;
+            self.resultLab.text = self.turnArray[count-b/2];
         }
     }
-    
+
     
     
 }

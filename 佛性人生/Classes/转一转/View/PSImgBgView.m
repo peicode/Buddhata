@@ -9,11 +9,6 @@
 #import "PSImgBgView.h"
 #import "PSBgView.h"
 @implementation PSImgBgView
-
--(void)layoutSubviews{
-    
-    
-}
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if(self){
@@ -25,7 +20,7 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(btnClick)];
         [_btnView addGestureRecognizer:tap];
         //设置背景图的尺寸
-        _iconView.image = [UIImage imageNamed:@"LuckyBaseBackground"];
+        _iconView.image = [UIImage imageNamed:@"zhuanpan"];
         //设置按钮的图片
         _btnView.frame = CGRectMake(self.bounds.size.width/2-81, self.bounds.size.height/2-81, 81, 81);
         _btnView.center = _iconView.center;
@@ -53,7 +48,7 @@
 - (void)btnClick{
     [self startRotating];
     //概率 创造一个随机数（0，360）arc4random()%360
-    float lotteryPro = 40+arc4random()%320;
+    self.lotteryPro = arc4random()%360;
     //设置转动圈数
     NSInteger circleNum = 6;
     CGFloat perAngle = M_PI/180.0;
@@ -62,7 +57,7 @@
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
     //KVO 监听核心动画转动多少弧度 ----test
 //    [anim addObserver:self forKeyPath:@"toValue" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    self.endAngle = 360*perAngle*circleNum+lotteryPro*perAngle;
+    self.endAngle = 360*perAngle*circleNum+self.lotteryPro*perAngle;
     //    NSLog(@"最终概率是----%f",endAngle/M_PI*180);
     anim.toValue = [NSNumber numberWithFloat:self.endAngle];
     
@@ -79,8 +74,8 @@
     //
     [self.iconView.layer addAnimation:anim forKey:@"rotation"];
     [self.iconView.layer addObserver:self forKeyPath:@"transform" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-    if (self.delegete && [self.delegete respondsToSelector:@selector(sendRandomAngle:)]) {
-        [self.delegete sendRandomAngle:lotteryPro];
+    if (self.delegete && [self.delegete respondsToSelector:@selector(judgeArrayNull)]) {
+        [self.delegete judgeArrayNull];
     }
 }
 /**
@@ -105,7 +100,9 @@
 }
 #pragma mark - 动画停止
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
-    
+    if (self.delegete && [self.delegete respondsToSelector:@selector(sendRandomAngle:)]) {
+        [self.delegete sendRandomAngle:self.lotteryPro];
+    }
     //self.turnArray = [self returnResultArray];
     [self stoprotating];
 }

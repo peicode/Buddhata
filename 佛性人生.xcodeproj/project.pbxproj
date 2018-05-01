@@ -20,8 +20,6 @@
 		FC01C65120745A54009E43B9 /* shake_begin.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC01C650207455A0009E43B9 /* shake_begin.wav */; };
 		FC01C65220745A54009E43B9 /* shake_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC01C64F207455A0009E43B9 /* shake_end.wav */; };
 		FC01C65520745E3E009E43B9 /* PSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC01C65420745E3D009E43B9 /* PSMenuViewController.m */; };
-		FCD575A3207CE5FD00E51867 /* UINavigationController+XWTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57564207CE53900E51867 /* UINavigationController+XWTransition.m */; };
-		FCD575A4207CE60100E51867 /* UIViewController+XWTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57568207CE53900E51867 /* UIViewController+XWTransition.m */; };
 		FCD575A5207CE60600E51867 /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57566207CE53900E51867 /* UIView+Snapshot.m */; };
 		FCD575A6207CE74900E51867 /* XWInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5756B207CE53900E51867 /* XWInteractiveTransition.m */; };
 		FCD575A7207CE74E00E51867 /* XWTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5756D207CE53900E51867 /* XWTransitionAnimator.m */; };
@@ -29,13 +27,14 @@
 		FCD575A9207CE75800E51867 /* XWCoolAnimator+XWMiddlePageFlip.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5757D207CE53900E51867 /* XWCoolAnimator+XWMiddlePageFlip.m */; };
 		FCD575AA207CE89B00E51867 /* XWCoolAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57585207CE53900E51867 /* XWCoolAnimator.m */; };
 		FCD575AB207CE8A400E51867 /* XWMagicMoveAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575A2207CE53900E51867 /* XWMagicMoveAnimator.m */; };
-		FCD575AF207E248A00E51867 /* PSTransController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575AE207E248A00E51867 /* PSTransController.m */; };
 		FCD575B3207F21C100E51867 /* XWCoolAnimator+XWPortal.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57581207CE53900E51867 /* XWCoolAnimator+XWPortal.m */; };
 		FCD575C720883E5700E51867 /* XWCoolAnimator+XWPageFlip.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5757F207CE53900E51867 /* XWCoolAnimator+XWPageFlip.m */; };
 		FCD575CA20885BAF00E51867 /* PSBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD575C920885BAF00E51867 /* PSBgView.m */; };
 		FCD5760920915D9A00E51867 /* PSImgBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5760820915D9100E51867 /* PSImgBgView.m */; };
 		FCD5760C2091662900E51867 /* PSTransViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5760B2091662900E51867 /* PSTransViewController.m */; };
 		FCD576112096BEC800E51867 /* comic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FCD576102096BE2B00E51867 /* comic.otf */; };
+		FCD576122098395900E51867 /* UIViewController+XWTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57568207CE53900E51867 /* UIViewController+XWTransition.m */; };
+		FCD576152098544400E51867 /* UIColor+random.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD576142098544400E51867 /* UIColor+random.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,8 +138,6 @@
 		FCD5759F207CE53900E51867 /* XWFilterTransitionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWFilterTransitionView.m; sourceTree = "<group>"; };
 		FCD575A1207CE53900E51867 /* XWMagicMoveAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XWMagicMoveAnimator.h; sourceTree = "<group>"; };
 		FCD575A2207CE53900E51867 /* XWMagicMoveAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XWMagicMoveAnimator.m; sourceTree = "<group>"; };
-		FCD575AD207E248A00E51867 /* PSTransController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTransController.h; sourceTree = "<group>"; };
-		FCD575AE207E248A00E51867 /* PSTransController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTransController.m; sourceTree = "<group>"; };
 		FCD575C820885BAF00E51867 /* PSBgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSBgView.h; sourceTree = "<group>"; };
 		FCD575C920885BAF00E51867 /* PSBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSBgView.m; sourceTree = "<group>"; };
 		FCD5760720915D9000E51867 /* PSImgBgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSImgBgView.h; sourceTree = "<group>"; };
@@ -148,6 +145,8 @@
 		FCD5760A2091662900E51867 /* PSTransViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSTransViewController.h; sourceTree = "<group>"; };
 		FCD5760B2091662900E51867 /* PSTransViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSTransViewController.m; sourceTree = "<group>"; };
 		FCD576102096BE2B00E51867 /* comic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = comic.otf; sourceTree = "<group>"; };
+		FCD576132098544400E51867 /* UIColor+random.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+random.h"; sourceTree = "<group>"; };
+		FCD576142098544400E51867 /* UIColor+random.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+random.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,6 +441,8 @@
 				FCD575C920885BAF00E51867 /* PSBgView.m */,
 				FCD5760720915D9000E51867 /* PSImgBgView.h */,
 				FCD5760820915D9100E51867 /* PSImgBgView.m */,
+				FCD576132098544400E51867 /* UIColor+random.h */,
+				FCD576142098544400E51867 /* UIColor+random.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -449,8 +450,6 @@
 		FCD5760E2091663700E51867 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FCD575AD207E248A00E51867 /* PSTransController.h */,
-				FCD575AE207E248A00E51867 /* PSTransController.m */,
 				FCD5760A2091662900E51867 /* PSTransViewController.h */,
 				FCD5760B2091662900E51867 /* PSTransViewController.m */,
 			);
@@ -656,24 +655,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD576122098395900E51867 /* UIViewController+XWTransition.m in Sources */,
 				FCD575C720883E5700E51867 /* XWCoolAnimator+XWPageFlip.m in Sources */,
 				FCD575B3207F21C100E51867 /* XWCoolAnimator+XWPortal.m in Sources */,
 				FCD575AB207CE8A400E51867 /* XWMagicMoveAnimator.m in Sources */,
 				FCD575AA207CE89B00E51867 /* XWCoolAnimator.m in Sources */,
 				FCD575A9207CE75800E51867 /* XWCoolAnimator+XWMiddlePageFlip.m in Sources */,
 				FCD575A8207CE75200E51867 /* XWCircleSpreadAnimator.m in Sources */,
+				FCD576152098544400E51867 /* UIColor+random.m in Sources */,
 				FCD5760920915D9A00E51867 /* PSImgBgView.m in Sources */,
 				FCD575A7207CE74E00E51867 /* XWTransitionAnimator.m in Sources */,
 				FCD575A6207CE74900E51867 /* XWInteractiveTransition.m in Sources */,
 				FCD575A5207CE60600E51867 /* UIView+Snapshot.m in Sources */,
-				FCD575A4207CE60100E51867 /* UIViewController+XWTransition.m in Sources */,
-				FCD575A3207CE5FD00E51867 /* UINavigationController+XWTransition.m in Sources */,
 				FCD5760C2091662900E51867 /* PSTransViewController.m in Sources */,
 				FC01C65520745E3E009E43B9 /* PSMenuViewController.m in Sources */,
 				FC01C64D20744F1D009E43B9 /* ViewController.m in Sources */,
 				FC01C64920744DD8009E43B9 /* PSShakeViewController.m in Sources */,
 				FC01C62520744D44009E43B9 /* main.m in Sources */,
-				FCD575AF207E248A00E51867 /* PSTransController.m in Sources */,
 				FCD575CA20885BAF00E51867 /* PSBgView.m in Sources */,
 				FC01C61720744D44009E43B9 /* AppDelegate.m in Sources */,
 			);

@@ -50,33 +50,37 @@
 }
 - (void)setNavgaView{
     UIView *headView = [[UIView alloc]init];
-    headView.frame = CGRectMake(0, 20, self.view.frame.size.width, 60);
-    headView.backgroundColor = [UIColor colorWithRed:255/255.0 green:125/255.0 blue:125/255.0 alpha:1];
+    headView.frame = CGRectMake(0, 0, PSSCREENW, 60);
+    headView.backgroundColor = [UIColor colorWithRed:77/255.0 green:161/255.0 blue:240/255.0 alpha:1];
     [self.view addSubview:headView];
     
     UIButton *sureBtn = [[UIButton alloc]init];
-    sureBtn.frame = CGRectMake(40, 20, 40, 40);
-    [sureBtn setTitle:@"back" forState:UIControlStateNormal];
-    sureBtn.backgroundColor = [UIColor grayColor];
+    sureBtn.frame = CGRectMake(12, 28, 20, 24);
+//    [sureBtn setTitle:@"back" forState:UIControlStateNormal];
+//    sureBtn.backgroundColor = [UIColor grayColor];
     [headView addSubview:sureBtn];
+    [sureBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.center = CGPointMake(self.view.center.x-30, 20);
-    titleLabel.text = @"佛系选择";
-    titleLabel.font = [UIFont systemFontOfSize:22];
+    titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 25);
+    titleLabel.font = [UIFont fontWithName:@"PingFang SC" size:22];
+    titleLabel.text = @"选项清单";
+    titleLabel.textColor = [UIColor whiteColor];
+    
     [titleLabel sizeToFit];
+    NSLog(@"%@",NSStringFromCGRect(titleLabel.frame));
     [headView addSubview:titleLabel];
     
 //    UIButton *addBtn = [[UIButton alloc]init];
-//    addBtn.frame = CGRectMake(self.view.frame.size.width - 60, 20, 40, 40);
+//    addBtn.frame = CGRectMake(PSSCREENW - 60, 20, 40, 40);
 //    [addBtn setTitle:@"add" forState:UIControlStateNormal];
 //    addBtn.backgroundColor = [UIColor grayColor];
 //    [headView addSubview:addBtn];
 //    [addBtn addTarget:self action:@selector(addBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     _tableView = [[UITableView alloc]init];
-    _tableView.frame = CGRectMake(0, headView.frame.size.height+20,self.view.frame.size.width , 660);
+    _tableView.frame = CGRectMake(0, headView.frame.size.height,PSSCREENW , 660);
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.rowHeight = 60;
     _tableView.delegate = self;
@@ -86,7 +90,7 @@
 //    UIView *fview = [UIView new];
 //    self.tableView.backgroundColor = [UIColor clearColor];
 //    [self.tableView setTableFooterView:fview];
-    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+//    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.view addSubview:_tableView];
     
     
@@ -150,6 +154,7 @@
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ab"];
         cell.imageView.image = [UIImage imageNamed:@"add"];
+        cell.textLabel.text = @"添加新选项";
         return cell;
     }
     
