@@ -81,6 +81,7 @@
     
     _tableView = [[UITableView alloc]init];
     _tableView.frame = CGRectMake(0, headView.frame.size.height,PSSCREENW , 660);
+    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.rowHeight = 60;
     _tableView.delegate = self;
@@ -90,7 +91,7 @@
 //    UIView *fview = [UIView new];
 //    self.tableView.backgroundColor = [UIColor clearColor];
 //    [self.tableView setTableFooterView:fview];
-//    _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    
     [self.view addSubview:_tableView];
     
     

@@ -12,7 +12,6 @@
 @implementation PSBgView
 //static CGFloat * const linex = self.frame.size.width/2;
 -(void)layoutSubviews{
-    
     _label.frame = CGRectMake(0, self.bounds.size.height/2, self.bounds.size.width, 20);
 }
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -21,14 +20,13 @@
     _label.textAlignment = NSTextAlignmentCenter;
     _label.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:14];
     _label.textColor = [UIColor whiteColor];
-//    _label.text = @"廖佩志";
-//    _label.font = [UIFont systemFontOfSize:12];
     [_label sizeToFit];
 
     [self addSubview:_label];
     return self;
 }
 -(void)drawRect:(CGRect)rect{
+//    NSMutableArray *array = [UIColor returnColorArray];
     UIColor *color = [UIColor randomColor];
     [color set];//设置线条颜色
     UIBezierPath *path = [UIBezierPath bezierPath];
@@ -40,9 +38,12 @@
     [path fill];
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     lineLayer.lineWidth = 3;
-    lineLayer.strokeColor = [UIColor colorWithRed:0 green:8/255.0 blue:92/255.0 alpha:1].CGColor;
+//    lineLayer.strokeColor = [UIColor colorWithRed:0 green:8/255.0 blue:92/255.0 alpha:1].CGColor;
     lineLayer.path = path.CGPath;
-//    [self.layer addSublayer:lineLayer];
     self.layer.mask = lineLayer;
+}
+-(void)bringCount:(int)count{
+    
+    self.num = count;
 }
 @end

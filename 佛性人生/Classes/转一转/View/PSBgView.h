@@ -13,4 +13,7 @@
 @property(nonatomic,strong)UIImageView *bgImgView;
 @property(nonatomic,strong)NSMutableArray *turnArray;
 @property(nonatomic,strong)UILabel *label;
+@property(nonatomic,assign)int num;
+//设置转盘上填充的颜色
+-(void)bringCount:(int)count;
 @end

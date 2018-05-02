@@ -102,8 +102,15 @@
     _textLab = [[UILabel alloc]init];
 //    _textLab.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     _textLab.textAlignment = NSTextAlignmentCenter;
-    _textLab.frame = CGRectMake(0 , 82, self.view.frame.size.width, 50);
-    _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
+    if(SCREENW == 414){
+        _textLab.frame = CGRectMake(0, 104, PSSCREENW, 35);
+        _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
+    }else{
+        _textLab.frame = CGRectMake(0, 82, PSSCREENW, 31);
+        _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:31];
+    }
+//    _textLab.frame = CGRectMake(0 , 82, self.view.frame.size.width, 50);
+//    _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
     _textLab.textColor = [UIColor whiteColor];
     _textLab.text = @"施主，请摇晃你的手机";
     _textLab.textAlignment = NSTextAlignmentCenter;
@@ -125,18 +132,24 @@
 #pragma mark -摇一摇相关方法
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     if(motion == UIEventSubtypeMotionShake){
-        
+        [_bgView setImage:[UIImage imageNamed:@"shake2"]];
         //1.添加动画
         _headView = [[UIImageView alloc]init];
-        _headView.frame = CGRectMake(100, 179, 179, 259);
+        if(SCREENW == 414){
+            _headView.frame = CGRectMake(110, 198, 198, 285);
+            _headView.layer.position = CGPointMake(209, 481);
+        }else{
+            _headView.frame = CGRectMake(100, 179, 179, 259);
+            _headView.layer.position = CGPointMake(189.5, 436);
+        }
         _headView.image = [UIImage imageNamed:@"head"];
         [self.view addSubview:_headView];
-//        _headView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+        _headView.layer.anchorPoint = CGPointMake(0.5, 1.0);
         CABasicAnimation *swingAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-        swingAnimation.duration = 0.5;
+        swingAnimation.duration = 0.4;
         CAMediaTimingFunction *mediaTiming = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         swingAnimation.timingFunction = mediaTiming;
-        swingAnimation.repeatCount = 4.0;
+        swingAnimation.repeatCount = 6.0;
         float fvalue = -M_PI/10.0;
         float evalue = M_PI/10.0;
         swingAnimation.fromValue = [NSNumber numberWithDouble:fvalue];
@@ -161,6 +174,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSLog(@"结束摇动");
         [self.headView removeFromSuperview];
+        [_bgView setImage:[UIImage imageNamed:@"bgShake"]];
         //需要判断 是否有数据 ，如果没有 需要提示
         self.mulArray = [self returnResultArray];
         if(self.mulArray.count == 0){

@@ -10,4 +10,5 @@
 
 @interface UIColor (random)
 +(UIColor *)randomColor;
++(NSMutableArray *)returnColorArray;
 @end

@@ -12,6 +12,7 @@
 #import "PSMenuViewController.h"
 #import "PSBgView.h"
 #import "PSImgBgView.h"
+#import "UIColor+random.h"
 @interface PSTransViewController ()<CAAnimationDelegate,PSImgDelegate>
 @property(nonatomic,strong)PSImgBgView *bgView;
 @property(nonatomic,strong)UIButton *menuBtn;
@@ -32,6 +33,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _BGImageView = [[UIImageView alloc]init];
     _BGImageView.frame = CGRectMake(0, 0, PSSCREENW, PSSCREENH);
     _BGImageView.image = [UIImage imageNamed:@"bgTurn"];
@@ -43,14 +45,22 @@
  转盘界面 (添加转盘上的组件)
  */
 -(void)setupMainUI{
+    //添加uilabel
+    //获取转盘上所需总数
+    int count = (int)self.turnArray.count;
+    //根据尺寸设置转盘的大小
     _bgView = [[PSImgBgView alloc]init];
-    _bgView.frame = CGRectMake(0, 0, 286, 286);
+    if(SCREENW == 414){
+        _bgView.frame = CGRectMake(0, 0, 369, 369);
+    }else{
+        _bgView.frame = CGRectMake(0, 0, 334, 334);
+    }
+    
     _bgView.center = self.view.center;
     _bgView.delegete = self;
     [self.view addSubview:_bgView];
-    //添加uilabel
-    //获取转盘上所需总数
-        int count = (int)self.turnArray.count;
+    //
+//    NSMutableArray *array = [UIColor returnColorArray];
     //旋转的度数   360/count
     for (int i = 0; i< count; i++) {
         //背景图的半径
@@ -66,9 +76,13 @@
         float height = radius*cos(180.0/count/180.0*M_PI);
         //*****测试代码
         PSBgView *bg = [[PSBgView alloc]init];
-        //        bg.backgroundColor = [UIColor redColor];
+        [bg bringCount:count];
+//        UIColor *color = array[i];
+//        CGColorRef color = (__bridge CGColorRef)array[i];
+//        [bg.layer setBackgroundColor: color];
+//        bg.backgroundColor = [UIColor randomColor];
+        NSLog(@"%@",bg.layer.backgroundColor);
         bg.bounds = CGRectMake(0, 0, width, height);
-        //        NSLog(@"----%d---%@",i,NSStringFromCGRect(bg.frame));
         bg.layer.anchorPoint = CGPointMake(0.5, 1.0);
         bg.layer.position = CGPointMake(self.bgView.iconView.bounds.size.width*0.5,self.bgView.iconView.bounds.size.height*0.5);
         bg.center = CGPointMake(CGRectGetHeight(self.bgView.iconView.bounds)/2, CGRectGetHeight(self.bgView.iconView.bounds)/2);
@@ -93,9 +107,17 @@
     [self.view addSubview:backBtn];
     //显示结果
     _resultLab = [[UILabel alloc]init];
-    _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 35);
-    _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 82);
-    _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
+    if(SCREENW == 414){
+        _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 35);
+        _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
+        _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 104);
+    }else{
+        _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 31);
+        _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:31];
+        _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 82);
+    }
+    
+    
     _resultLab.text = @"施主，请点击开始";
     _resultLab.textColor = [UIColor whiteColor];
     _resultLab.textAlignment = NSTextAlignmentCenter;
@@ -136,6 +158,12 @@
     _database = [FMDatabase databaseWithPath:filePath];
     [_database open];
     NSString *buddaSql = @"CREATE TABLE IF NOT EXISTS budda (id integer PRIMARY KEY AUTOINCREMENT, context text NOT NULL);";
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@1];
+//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@2];
+//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@3];
+//    });
     [_database executeUpdate:buddaSql];
     FMResultSet *result = [_database executeQuery:@"SELECT * FROM budda"];
     NSMutableArray *array = [NSMutableArray array];

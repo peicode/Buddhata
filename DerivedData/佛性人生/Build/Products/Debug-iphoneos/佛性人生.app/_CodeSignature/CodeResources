@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		qUXxkCkX0KMvUOnpI5ZslhfTO1c=
+		xLf28gV3w9IdvlsXYCwkItudXdE=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib</key>
 		<data>
-		nEJQ+PxP+qYO3irFUrjix/zvp3w=
+		Yrf+aTIXakXlK8kmqRRwPZ7cnRU=
 		</data>
 		<key>Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
@@ -30,15 +30,19 @@
 		</data>
 		<key>Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib</key>
 		<data>
-		OUBeBP+5sM5Y3510JF1t90j8DnE=
+		4qfrJ78NtEaXD1bbKTFkFIv8/tc=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		zXc1O0b8c2tagQfV/Ayhvz7cR/Q=
+		jkhaBrVSpYDDunmfsela3Fe6fA0=
 		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>comic.otf</key>
+		<data>
+		xe0wPCn09p+/oJ92v+S48UTRsu8=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -59,11 +63,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qUXxkCkX0KMvUOnpI5ZslhfTO1c=
+			xLf28gV3w9IdvlsXYCwkItudXdE=
 			</data>
 			<key>hash2</key>
 			<data>
-			Be45ZF6JkdXDDTUzM4jjexheK4mEG6ZOyoQVLWjuWd4=
+			+8ThYPb5k7b+S70v8n9CXW5+Yfcyb7sWnYJED/YWT2Y=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -103,11 +107,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nEJQ+PxP+qYO3irFUrjix/zvp3w=
+			Yrf+aTIXakXlK8kmqRRwPZ7cnRU=
 			</data>
 			<key>hash2</key>
 			<data>
-			9NN8sU/vm3xhw7l45Fsg7UBnLZzzkZYi58PKlobiAp4=
+			KeJOJhs9wTKg3QIX0hF1YUvqHpXzQNK5WvZSvBMbXC8=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/Info.plist</key>
@@ -125,11 +129,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OUBeBP+5sM5Y3510JF1t90j8DnE=
+			4qfrJ78NtEaXD1bbKTFkFIv8/tc=
 			</data>
 			<key>hash2</key>
 			<data>
-			n8a7As5ysIv8noFZQXeAgFfpUS/+fQZ6WQuZ8CT8G4E=
+			BbsOLQtJr/1ESwa2wQtpemSFHqgzW6KtbDqSDk24rXE=
+			</data>
+		</dict>
+		<key>comic.otf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xe0wPCn09p+/oJ92v+S48UTRsu8=
+			</data>
+			<key>hash2</key>
+			<data>
+			bwmRtrxcAgV296hdwOUJ4fzeGdu64OUXM56iWSDpLL8=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
