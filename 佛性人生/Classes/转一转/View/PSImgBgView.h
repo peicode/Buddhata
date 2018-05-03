@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol PSImgDelegate<NSObject>
 @optional
--(void)judgeArrayNull;
+-(BOOL)judgeArrayNull;
 -(void)sendRandomAngle: (float )angle;
 @end
 @interface PSImgBgView : UIView<CAAnimationDelegate>

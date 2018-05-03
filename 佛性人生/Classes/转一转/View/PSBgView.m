@@ -18,7 +18,7 @@
     self = [super initWithFrame:frame];
     _label = [[UILabel alloc]init];
     _label.textAlignment = NSTextAlignmentCenter;
-    _label.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:14];
+    _label.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:16];
     _label.textColor = [UIColor whiteColor];
     [_label sizeToFit];
 

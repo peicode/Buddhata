@@ -81,17 +81,32 @@
     _bgView.frame = self.view.frame;
     _bgView.userInteractionEnabled = YES;
     _bgView.contentMode = UIViewContentModeScaleToFill;
-    _bgView.image = [UIImage imageNamed:@"bgShake"];
+    if (SCREENH == 812) {
+        _bgView.image = [UIImage imageNamed:@"bgShakeX"];
+    }else{
+      _bgView.image = [UIImage imageNamed:@"bgShake"];
+    }
+    
     [self.view addSubview:_bgView];
     //菜单
     _menuBtn  = [[UIButton alloc]init];
-    _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+    if (SCREENH == 812) {
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 44, 24, 24);
+    }else{
+        
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+    }
     [_menuBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [_bgView addSubview:_menuBtn];
     [_menuBtn addTarget:self action:@selector(menuBtnClick) forControlEvents:UIControlEventTouchUpInside];
     //返回
     _backBtn = [[UIButton alloc]init];
-    _backBtn.frame = CGRectMake(12, 29, 14, 24);
+    if (SCREENH == 812) {
+        _backBtn.frame = CGRectMake(12, 44, 14, 24);
+    }else{
+        _backBtn.frame = CGRectMake(12, 29, 14, 24);
+    }
+    
     [_backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [_bgView addSubview:_backBtn];
     [_backBtn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -105,12 +120,13 @@
     if(SCREENW == 414){
         _textLab.frame = CGRectMake(0, 104, PSSCREENW, 35);
         _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
+    }else if(SCREENH == 812){
+        _textLab.frame = CGRectMake(0, 107, PSSCREENW, 35);
+        _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:32];
     }else{
         _textLab.frame = CGRectMake(0, 82, PSSCREENW, 31);
         _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:31];
     }
-//    _textLab.frame = CGRectMake(0 , 82, self.view.frame.size.width, 50);
-//    _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
     _textLab.textColor = [UIColor whiteColor];
     _textLab.text = @"施主，请摇晃你的手机";
     _textLab.textAlignment = NSTextAlignmentCenter;
@@ -132,17 +148,27 @@
 #pragma mark -摇一摇相关方法
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     if(motion == UIEventSubtypeMotionShake){
-        [_bgView setImage:[UIImage imageNamed:@"shake2"]];
+        if(SCREENH == 812){
+            [_bgView setImage:[UIImage imageNamed:@"bgShake2X"]];
+        }else{
+            [_bgView setImage:[UIImage imageNamed:@"shake2"]];
+        }
         //1.添加动画
         _headView = [[UIImageView alloc]init];
         if(SCREENW == 414){
             _headView.frame = CGRectMake(110, 198, 198, 285);
             _headView.layer.position = CGPointMake(209, 481);
+            _headView.image = [UIImage imageNamed:@"head"];
+        }else if(SCREENH == 812){
+            _headView.frame = CGRectMake(84, 201, 210, 303);
+            _headView.layer.position = CGPointMake(189, 503);
+            _headView.image = [UIImage imageNamed:@"headX"];
         }else{
             _headView.frame = CGRectMake(100, 179, 179, 259);
             _headView.layer.position = CGPointMake(189.5, 436);
+            _headView.image = [UIImage imageNamed:@"head"];
         }
-        _headView.image = [UIImage imageNamed:@"head"];
+        
         [self.view addSubview:_headView];
         _headView.layer.anchorPoint = CGPointMake(0.5, 1.0);
         CABasicAnimation *swingAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
@@ -174,7 +200,12 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSLog(@"结束摇动");
         [self.headView removeFromSuperview];
-        [_bgView setImage:[UIImage imageNamed:@"bgShake"]];
+        if(SCREENH == 812){
+            [_bgView setImage:[UIImage imageNamed:@"bgShakeX"]];
+        }else{
+           [_bgView setImage:[UIImage imageNamed:@"bgShake"]];
+        }
+        
         //需要判断 是否有数据 ，如果没有 需要提示
         self.mulArray = [self returnResultArray];
         if(self.mulArray.count == 0){
@@ -190,10 +221,14 @@
         //2.添加摇动声音
 //        AudioServicesPlaySystemSound(self.soundEndID);
         //3.显示结果
-        _bgView.image = [UIImage imageNamed:@"bgShake"];
+//        _bgView.image = [UIImage imageNamed:@"bgShake"];
 //        NSLog(@"%lu",(unsigned long)self.mulArray.count);
         int count = (int)self.mulArray.count;
         int i = arc4random() % count;
+//        if(SCREENH == 812){
+            _textLab.frame = CGRectMake(0, 89, PSSCREENW, 45);
+            _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:45];
+//        }
         _textLab.text = _mulArray[i];
         //4.设置震动
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);

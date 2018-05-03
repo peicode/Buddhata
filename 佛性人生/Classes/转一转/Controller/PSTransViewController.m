@@ -33,13 +33,18 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     _BGImageView = [[UIImageView alloc]init];
     _BGImageView.frame = CGRectMake(0, 0, PSSCREENW, PSSCREENH);
-    _BGImageView.image = [UIImage imageNamed:@"bgTurn"];
+    if(SCREENH == 812){
+        _BGImageView.image = [UIImage imageNamed:@"bgTurnX"];
+    }else{
+       _BGImageView.image = [UIImage imageNamed:@"bgTurn"];
+    }
+    
     [self.view addSubview:_BGImageView];
     [self setupMainUI];
     [self setupOtherUI];
+    
 }
 /**
  转盘界面 (添加转盘上的组件)
@@ -76,12 +81,6 @@
         float height = radius*cos(180.0/count/180.0*M_PI);
         //*****测试代码
         PSBgView *bg = [[PSBgView alloc]init];
-        [bg bringCount:count];
-//        UIColor *color = array[i];
-//        CGColorRef color = (__bridge CGColorRef)array[i];
-//        [bg.layer setBackgroundColor: color];
-//        bg.backgroundColor = [UIColor randomColor];
-        NSLog(@"%@",bg.layer.backgroundColor);
         bg.bounds = CGRectMake(0, 0, width, height);
         bg.layer.anchorPoint = CGPointMake(0.5, 1.0);
         bg.layer.position = CGPointMake(self.bgView.iconView.bounds.size.width*0.5,self.bgView.iconView.bounds.size.height*0.5);
@@ -94,13 +93,23 @@
 -(void)setupOtherUI{
     //菜单
     _menuBtn  = [[UIButton alloc]init];
-    _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+    if(SCREENH == 812){
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 44, 24, 24);
+    }else{
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+    }
+    
     [_menuBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [self.view addSubview:_menuBtn];
     [_menuBtn addTarget:self action:@selector(menuBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     //返回按钮
-    UIButton *backBtn  = [[UIButton alloc]initWithFrame:CGRectMake(12, 29, 14, 24)];
+    UIButton *backBtn = [[UIButton alloc]init];
+    if(SCREENH == 812){
+        backBtn.frame = CGRectMake(12, 44, 14, 24);
+    }else{
+        backBtn.frame = CGRectMake(12, 29, 14, 24);
+    }
 //    [backBtn setTitle:@"BACK" forState:UIControlStateNormal];
     [backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchDown];
@@ -111,6 +120,10 @@
         _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 35);
         _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:35];
         _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 104);
+    }else if(SCREENH == 812){
+        _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 35);
+        _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:32];
+        _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 107);
     }else{
         _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 31);
         _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:31];
@@ -158,20 +171,21 @@
     _database = [FMDatabase databaseWithPath:filePath];
     [_database open];
     NSString *buddaSql = @"CREATE TABLE IF NOT EXISTS budda (id integer PRIMARY KEY AUTOINCREMENT, context text NOT NULL);";
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@1];
-//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@2];
-//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@3];
-//    });
     [_database executeUpdate:buddaSql];
+    
     FMResultSet *result = [_database executeQuery:@"SELECT * FROM budda"];
     NSMutableArray *array = [NSMutableArray array];
     while ([result next]) {
         NSString *con = [result stringForColumn:@"context"];
         [array addObject:con];
     }
-    
+//    if (array.count == 0) {
+//        [_database open];
+//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"I"];
+//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"❤️"];
+//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"SY"];
+//        [_database close];
+//    }
     return array;
 }
 /**
@@ -183,7 +197,7 @@
     self.turnArray = [self returnResultArray];
     [self setupMainUI];
 }
--(void)judgeArrayNull{
+-(BOOL)judgeArrayNull{
     if (self.turnArray.count == 0) {
         //提示用户要去添加
         UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"还没选项" message:@"快去添加吧！" preferredStyle:UIAlertControllerStyleAlert];
@@ -191,7 +205,9 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self dismissViewControllerAnimated:YES completion:nil];
         });
-        return;
+        return NO;
+    }else{
+        return YES;
     }
 }
 /**
@@ -199,6 +215,8 @@
  */
 -(void)sendRandomAngle:(float)angle1{
     
+    self.resultLab.frame = CGRectMake(0, 89, PSSCREENW, 45);
+    self.resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:45];
     int count = (int)self.turnArray.count;
     float a = 360.0/count;
     float d = a/2;

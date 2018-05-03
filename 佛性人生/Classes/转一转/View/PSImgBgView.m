@@ -53,7 +53,9 @@
  */
 - (void)btnClick{
     if (self.delegete && [self.delegete respondsToSelector:@selector(judgeArrayNull)]) {
-        [self.delegete judgeArrayNull];
+        if ([self.delegete judgeArrayNull] == NO) {
+            return;
+        }
     }
     [self startRotating];
     //概率 创造一个随机数（0，360）arc4random()%360

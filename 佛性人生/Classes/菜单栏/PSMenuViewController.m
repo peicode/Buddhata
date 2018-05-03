@@ -50,20 +50,30 @@
 }
 - (void)setNavgaView{
     UIView *headView = [[UIView alloc]init];
-    headView.frame = CGRectMake(0, 0, PSSCREENW, 60);
+    UIButton *sureBtn = [[UIButton alloc]init];
+    UILabel *titleLabel = [[UILabel alloc]init];
+    if(SCREENH == 812){
+        headView.frame = CGRectMake(0, 0, PSSCREENW, 80);
+        sureBtn.frame = CGRectMake(12, 44, 20, 24);
+        titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 44);
+    }else{
+        headView.frame = CGRectMake(0, 0, PSSCREENW, 60);
+        sureBtn.frame = CGRectMake(12, 24, 20, 24);
+        titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 24);
+    }
+    
     headView.backgroundColor = [UIColor colorWithRed:77/255.0 green:161/255.0 blue:240/255.0 alpha:1];
     [self.view addSubview:headView];
     
-    UIButton *sureBtn = [[UIButton alloc]init];
-    sureBtn.frame = CGRectMake(12, 28, 20, 24);
+    
 //    [sureBtn setTitle:@"back" forState:UIControlStateNormal];
 //    sureBtn.backgroundColor = [UIColor grayColor];
     [headView addSubview:sureBtn];
     [sureBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 25);
+    
+    
     titleLabel.font = [UIFont fontWithName:@"PingFang SC" size:22];
     titleLabel.text = @"选项清单";
     titleLabel.textColor = [UIColor whiteColor];
@@ -71,16 +81,10 @@
     [titleLabel sizeToFit];
     NSLog(@"%@",NSStringFromCGRect(titleLabel.frame));
     [headView addSubview:titleLabel];
-    
-//    UIButton *addBtn = [[UIButton alloc]init];
-//    addBtn.frame = CGRectMake(PSSCREENW - 60, 20, 40, 40);
-//    [addBtn setTitle:@"add" forState:UIControlStateNormal];
-//    addBtn.backgroundColor = [UIColor grayColor];
-//    [headView addSubview:addBtn];
-//    [addBtn addTarget:self action:@selector(addBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    
+    //创建tableView
     _tableView = [[UITableView alloc]init];
-    _tableView.frame = CGRectMake(0, headView.frame.size.height,PSSCREENW , 660);
+    _tableView.frame = CGRectMake(0, headView.frame.size.height,PSSCREENW , PSSCREENH-60);
+    //去掉分割线  需要写下setSeparatorInset方法前面
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.rowHeight = 60;
@@ -88,13 +92,7 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 0)];
-//    UIView *fview = [UIView new];
-//    self.tableView.backgroundColor = [UIColor clearColor];
-//    [self.tableView setTableFooterView:fview];
-    
     [self.view addSubview:_tableView];
-    
-    
 }
 #pragma mark -更新TableView
 -(void)refreshUI{
@@ -108,12 +106,6 @@
     }
     self.choseArray = array;
     [self.tableView reloadData];
-    
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.choseArray.count inSection:0];
-//    [self.tableView beginUpdates];
-//    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationBottom];
-//    [self.tableView endUpdates];
-    
     [_db close];
 }
 
@@ -205,6 +197,18 @@
  保存按钮，保存tableView中的数据
  */
 - (void)sureBtnClick{
+    //至少需要三个选项
+    int count =(int) self.choseArray.count;
+    if(count == 2){
+        [_db open];
+        [_db executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"I❤️S"];
+        [_db close];
+        //需要刷新表格
+        [self refreshUI];
+        
+        //刷新转盘
+        [self.transVc refreshUILabelFormBGView];
+    }
     //退出界面
     [self dismissViewControllerAnimated:YES completion:nil];
 }
