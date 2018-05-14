@@ -25,6 +25,9 @@
 {
     FMDatabase *_database;
 }
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 -(NSMutableArray *)turnArray{
     if (_turnArray== nil) {
         _turnArray = [self returnResultArray];
@@ -33,6 +36,13 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    __weak typeof(self)weakSelf = self;
+    [self xw_registerBackInteractiveTransitionWithDirection:XWInteractiveTransitionGestureDirectionUp transitonBlock:^(CGPoint startPoint) {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    } edgeSpacing:PSSCREENW/2];
+    
+        
     _BGImageView = [[UIImageView alloc]init];
     _BGImageView.frame = CGRectMake(0, 0, PSSCREENW, PSSCREENH);
     if(SCREENH == 812){
@@ -46,6 +56,9 @@
     [self setupOtherUI];
     
 }
+-(void)closeTheDimmingVie{
+    [self.BGImageView resignFirstResponder];
+}
 /**
  转盘界面 (添加转盘上的组件)
  */
@@ -57,11 +70,15 @@
     _bgView = [[PSImgBgView alloc]init];
     if(SCREENW == 414){
         _bgView.frame = CGRectMake(0, 0, 369, 369);
+        _bgView.center = self.view.center;
+    }else if(SCREENH == 812){
+        _bgView.frame = CGRectMake(9, 293, 360, 360);
     }else{
         _bgView.frame = CGRectMake(0, 0, 334, 334);
+        _bgView.center = self.view.center;
     }
     
-    _bgView.center = self.view.center;
+    
     _bgView.delegete = self;
     [self.view addSubview:_bgView];
     //
@@ -81,6 +98,8 @@
         float height = radius*cos(180.0/count/180.0*M_PI);
         //*****测试代码
         PSBgView *bg = [[PSBgView alloc]init];
+        
+        [bg sendRandomNum:i];
         bg.bounds = CGRectMake(0, 0, width, height);
         bg.layer.anchorPoint = CGPointMake(0.5, 1.0);
         bg.layer.position = CGPointMake(self.bgView.iconView.bounds.size.width*0.5,self.bgView.iconView.bounds.size.height*0.5);
@@ -114,6 +133,9 @@
     [backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:backBtn];
+    [self setresultLab];
+}
+-(void)setresultLab{
     //显示结果
     _resultLab = [[UILabel alloc]init];
     if(SCREENW == 414){
@@ -123,18 +145,20 @@
     }else if(SCREENH == 812){
         _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 35);
         _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:32];
-        _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 107);
+        _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 150);
     }else{
         _resultLab.frame = CGRectMake(0, 0, PSSCREENW, 31);
         _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:31];
         _resultLab.center = CGPointMake(self.view.frame.size.width*0.5, 82);
     }
     
-    
-    _resultLab.text = @"施主，请点击开始";
+    if(self.turnArray.count == 0){
+        _resultLab.text = @"施主，请添加选项";
+    }else{
+        _resultLab.text = @"施主，请点击开始";
+    }
     _resultLab.textColor = [UIColor whiteColor];
     _resultLab.textAlignment = NSTextAlignmentCenter;
-//    _resultLab.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:_resultLab];
 }
 /**
@@ -179,13 +203,6 @@
         NSString *con = [result stringForColumn:@"context"];
         [array addObject:con];
     }
-//    if (array.count == 0) {
-//        [_database open];
-//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"I"];
-//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"❤️"];
-//        [_database executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"SY"];
-//        [_database close];
-//    }
     return array;
 }
 /**
@@ -193,18 +210,16 @@
  */
 -(void)refreshUILabelFormBGView{
     [self.bgView removeFromSuperview];
+    [self.resultLab removeFromSuperview];
     //需要刷新
     self.turnArray = [self returnResultArray];
     [self setupMainUI];
+    [self setresultLab];
+    
 }
 -(BOOL)judgeArrayNull{
     if (self.turnArray.count == 0) {
-        //提示用户要去添加
-        UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"还没选项" message:@"快去添加吧！" preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alertVc animated:YES completion:nil];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
+        _resultLab.text = @"施主，请添加选项";
         return NO;
     }else{
         return YES;
@@ -214,9 +229,16 @@
  这里显示结果
  */
 -(void)sendRandomAngle:(float)angle1{
+    if(SCREENH == 812){
+        _resultLab.frame = CGRectMake(28, 120, PSSCREENW-56, 91);
+    }else{
+        _resultLab.frame = CGRectMake(28, 60, PSSCREENW-56, 91);
+    }
     
-    self.resultLab.frame = CGRectMake(0, 89, PSSCREENW, 45);
-    self.resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:45];
+    _resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:45];
+    self.resultLab.numberOfLines = 0;
+//    self.resultLab.textAlignment = NSTextAlignmentJustified;
+//    self.resultLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:49];
     int count = (int)self.turnArray.count;
     float a = 360.0/count;
     float d = a/2;
@@ -236,9 +258,6 @@
             self.resultLab.text = self.turnArray[count-b/2];
         }
     }
-
-    
-    
 }
 @end
 

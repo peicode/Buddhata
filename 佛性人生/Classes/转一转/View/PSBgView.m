@@ -26,8 +26,7 @@
     return self;
 }
 -(void)drawRect:(CGRect)rect{
-//    NSMutableArray *array = [UIColor returnColorArray];
-    UIColor *color = [UIColor randomColor];
+    UIColor *color = [UIColor randomColorwith:_colornum];
     [color set];//设置线条颜色
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGPoint center =CGPointMake(self.bounds.size.width/2, self.bounds.size.height);
@@ -37,13 +36,12 @@
     [path addLineToPoint:CGPointMake(0, 0)];
     [path fill];
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
-    lineLayer.lineWidth = 3;
-//    lineLayer.strokeColor = [UIColor colorWithRed:0 green:8/255.0 blue:92/255.0 alpha:1].CGColor;
+    lineLayer.lineWidth = 1;
+    lineLayer.strokeColor = [UIColor colorWithRed:0 green:8/255.0 blue:92/255.0 alpha:1].CGColor;
     lineLayer.path = path.CGPath;
     self.layer.mask = lineLayer;
 }
--(void)bringCount:(int)count{
-    
-    self.num = count;
+-(void)sendRandomNum:(int)num{
+    self.colornum = num;
 }
 @end

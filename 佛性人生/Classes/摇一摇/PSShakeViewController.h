@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PSShakeViewController : UIViewController
-
+-(void)refreshLabelFromShake;
 @end

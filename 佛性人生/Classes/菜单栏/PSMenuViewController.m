@@ -7,6 +7,7 @@
 //
 
 #import "PSMenuViewController.h"
+#import "UIViewController+XWTransition.h"
 @interface PSMenuViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSMutableArray *choseArray;
 @property(nonatomic,strong)UITableView *tableView;
@@ -18,6 +19,9 @@
     NSString *_textStr;
     FMDatabase *_db;
 }
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
@@ -26,6 +30,10 @@
     [self setNavgaView];
     //创建数据库
     [self creatFMDBdata];
+    __weak typeof(self)weakSelf = self;
+    [self xw_registerBackInteractiveTransitionWithDirection:XWInteractiveTransitionGestureDirectionRight transitonBlock:^(CGPoint startPoint) {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    } edgeSpacing:PSSCREENW/2];
 }
 -(NSMutableArray *)choseArray{
    
@@ -65,9 +73,6 @@
     headView.backgroundColor = [UIColor colorWithRed:77/255.0 green:161/255.0 blue:240/255.0 alpha:1];
     [self.view addSubview:headView];
     
-    
-//    [sureBtn setTitle:@"back" forState:UIControlStateNormal];
-//    sureBtn.backgroundColor = [UIColor grayColor];
     [headView addSubview:sureBtn];
     [sureBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -140,9 +145,6 @@
         cell.editingAccessoryType = UITableViewCellAccessoryDetailButton;
         cell.textLabel.text = self.choseArray[indexPath.row];
         cell.textLabel.font = [UIFont systemFontOfSize:22];
-//        cell.layer.masksToBounds = YES;
-//        cell.layer.cornerRadius = 10.0f;
-//        cell.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:0.8];
         return cell;
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ab"];
@@ -166,13 +168,12 @@
         [self deleteCelldataFromData:str];
         //从数据源中删除
         [_choseArray removeObjectAtIndex:indexPath.row];
-        
         //从列表中删除
         NSIndexPath *deleteIndex = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
         [tableView deleteRowsAtIndexPaths:@[deleteIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
         
-        
-       
+        //
+        [self.shakeVc refreshLabelFromShake];
         //刷新转盘
         [self.transVc refreshUILabelFormBGView];
     }
@@ -197,18 +198,25 @@
  保存按钮，保存tableView中的数据
  */
 - (void)sureBtnClick{
+    //需要刷新表格
+    [self refreshUI];
     //至少需要三个选项
     int count =(int) self.choseArray.count;
     if(count == 2){
         [_db open];
-        [_db executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"I❤️S"];
+        [_db executeUpdate:@"INSERT INTO budda (context) VALUES (?);",@"P❤️S"];
         [_db close];
-        //需要刷新表格
-        [self refreshUI];
+        
         
         //刷新转盘
         [self.transVc refreshUILabelFormBGView];
+        
     }
+    if (self.choseArray.count == 0) {
+        
+        [self.shakeVc refreshLabelFromShake];
+    }
+    
     //退出界面
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -233,6 +241,7 @@
             
             //刷新转盘
             [self.transVc refreshUILabelFormBGView];
+            [self.shakeVc refreshLabelFromShake];
         }
         
         

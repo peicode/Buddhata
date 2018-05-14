@@ -4,13 +4,45 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>AppIcon20x20@2x.png</key>
+		<data>
+		fflIUrMcWnM8AJfUL4nLEIi0oDs=
+		</data>
+		<key>AppIcon20x20@3x.png</key>
+		<data>
+		PZ7YacckFy19vZwqgS31ozRYKb0=
+		</data>
+		<key>AppIcon29x29@2x.png</key>
+		<data>
+		yKvYfrtm5gUHltFrzrTRHoIWuG4=
+		</data>
+		<key>AppIcon29x29@3x.png</key>
+		<data>
+		gHGqxEhU+SmR1jicV3IPnS/K4Os=
+		</data>
+		<key>AppIcon40x40@2x.png</key>
+		<data>
+		h5vP2YiVXZAhJ4+euETPIc/LI4I=
+		</data>
+		<key>AppIcon40x40@3x.png</key>
+		<data>
+		z2zghLVkO1Zg3pswopJno/b0o9U=
+		</data>
+		<key>AppIcon60x60@2x.png</key>
+		<data>
+		z2zghLVkO1Zg3pswopJno/b0o9U=
+		</data>
+		<key>AppIcon60x60@3x.png</key>
+		<data>
+		FI/HohL+PvbLVLR2L+AOWw/zKFM=
+		</data>
 		<key>Assets.car</key>
 		<data>
-		d8qWvEGT4PmOZIGSFd+F/78Gm+8=
+		zTlEF8TzCOqJI8YkGUSfNGXmTuw=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		b52xrfvVntht+L6rWKmfrffeqW8=
+		aO0ZucO5tRblRl6QSTpavu3NRv4=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -18,11 +50,11 @@
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		AEbB/C1GE5tOqWXZPyUmPDO33ew=
+		6kbZFMMLPVwAdyTN76ts+ErckPc=
 		</data>
 		<key>Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib</key>
 		<data>
-		Yrf+aTIXakXlK8kmqRRwPZ7cnRU=
+		jUdw8oP2qygupekJikjgkeob/Wg=
 		</data>
 		<key>Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
@@ -30,11 +62,11 @@
 		</data>
 		<key>Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib</key>
 		<data>
-		4qfrJ78NtEaXD1bbKTFkFIv8/tc=
+		uGI91BIaw66i418A8BgLPCRZsFo=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		jkhaBrVSpYDDunmfsela3Fe6fA0=
+		wQnlXK4oq7rme0gJmXopD89hPac=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -46,39 +78,119 @@
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		lF3WDx2CNHKGpLoMQ1C8kma/zhY=
-		</data>
-		<key>shake_begin.wav</key>
-		<data>
-		rvOWr88pq4kYfOUaJjkgp8DRvG4=
-		</data>
-		<key>shake_end.wav</key>
-		<data>
-		/B4IoXY33CUaHB6BWiAE7YJnqus=
+		utK21cUJ9BHcuEfmcWv6EDge4ZM=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>AppIcon20x20@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fflIUrMcWnM8AJfUL4nLEIi0oDs=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZRi3P8grePxUlqSSUjEAaJgJVvffPVqEWC/+VaxH1N8=
+			</data>
+		</dict>
+		<key>AppIcon20x20@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PZ7YacckFy19vZwqgS31ozRYKb0=
+			</data>
+			<key>hash2</key>
+			<data>
+			lWKIgyOWMyrYWGchGOBnE4A9KIHWnKmWQOgilPjnOw0=
+			</data>
+		</dict>
+		<key>AppIcon29x29@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yKvYfrtm5gUHltFrzrTRHoIWuG4=
+			</data>
+			<key>hash2</key>
+			<data>
+			QWvFX5fohhr0S0qQ70BSH0YsM3qmVrVe0N8Giyn5rzE=
+			</data>
+		</dict>
+		<key>AppIcon29x29@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			gHGqxEhU+SmR1jicV3IPnS/K4Os=
+			</data>
+			<key>hash2</key>
+			<data>
+			nf+KIANohYhCuugVp/aAfOCDJ+4T1X5r5AYe7MGuTb8=
+			</data>
+		</dict>
+		<key>AppIcon40x40@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			h5vP2YiVXZAhJ4+euETPIc/LI4I=
+			</data>
+			<key>hash2</key>
+			<data>
+			oJaMAsfqvrJuXPhPWr5w+xe3Xt0dQaKrjLRIvA6rJYQ=
+			</data>
+		</dict>
+		<key>AppIcon40x40@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			z2zghLVkO1Zg3pswopJno/b0o9U=
+			</data>
+			<key>hash2</key>
+			<data>
+			wgoD88J9VIOelYlRG3FU8G54zV0TS4soaiBp+6rp2J4=
+			</data>
+		</dict>
+		<key>AppIcon60x60@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			z2zghLVkO1Zg3pswopJno/b0o9U=
+			</data>
+			<key>hash2</key>
+			<data>
+			wgoD88J9VIOelYlRG3FU8G54zV0TS4soaiBp+6rp2J4=
+			</data>
+		</dict>
+		<key>AppIcon60x60@3x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FI/HohL+PvbLVLR2L+AOWw/zKFM=
+			</data>
+			<key>hash2</key>
+			<data>
+			2Q4elEcryfJ4dhtqCvCTDdjT/qucwBFh8wdJqCH2xoU=
+			</data>
+		</dict>
 		<key>Assets.car</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			d8qWvEGT4PmOZIGSFd+F/78Gm+8=
+			zTlEF8TzCOqJI8YkGUSfNGXmTuw=
 			</data>
 			<key>hash2</key>
 			<data>
-			LrbcQlHDyVQkpF3I01vi80id8+pS/NVp5PfchTXWfCs=
+			Bt/myueYhW6fD4pyy2gMJQxle7uKuz7D9z6UefWDpRE=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			b52xrfvVntht+L6rWKmfrffeqW8=
+			aO0ZucO5tRblRl6QSTpavu3NRv4=
 			</data>
 			<key>hash2</key>
 			<data>
-			i4ymfDqx291aLwTmnwMMlDF7m+dRvXTJDqIgKpHUI5E=
+			kFot5myLJb/PTnPEyEknBXuRu4uc6b1EoNFbKvlWffM=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
@@ -96,22 +208,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AEbB/C1GE5tOqWXZPyUmPDO33ew=
+			6kbZFMMLPVwAdyTN76ts+ErckPc=
 			</data>
 			<key>hash2</key>
 			<data>
-			2vUff67WlpVYP1c5RKlVBnCL+Tbf2KtWgv5exvQeZU0=
+			AXhjlW7p3Pguk1NjgP34QkSFi9i2g6XCrcGhgTUGepg=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Yrf+aTIXakXlK8kmqRRwPZ7cnRU=
+			jUdw8oP2qygupekJikjgkeob/Wg=
 			</data>
 			<key>hash2</key>
 			<data>
-			KeJOJhs9wTKg3QIX0hF1YUvqHpXzQNK5WvZSvBMbXC8=
+			vbferx/lTuIBNoNmcCveMHjGdlXxNIfhlb8TftJdLEs=
 			</data>
 		</dict>
 		<key>Base.lproj/Main.storyboardc/Info.plist</key>
@@ -129,11 +241,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4qfrJ78NtEaXD1bbKTFkFIv8/tc=
+			uGI91BIaw66i418A8BgLPCRZsFo=
 			</data>
 			<key>hash2</key>
 			<data>
-			BbsOLQtJr/1ESwa2wQtpemSFHqgzW6KtbDqSDk24rXE=
+			vPjUQAzPk9Zaddd+7y5M2fzGS2Zk1Wnedl6U6m6I4BY=
 			</data>
 		</dict>
 		<key>comic.otf</key>
@@ -151,33 +263,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lF3WDx2CNHKGpLoMQ1C8kma/zhY=
+			utK21cUJ9BHcuEfmcWv6EDge4ZM=
 			</data>
 			<key>hash2</key>
 			<data>
-			nKb+MxOxvcdzfUZeHQVksZnnHMhQnsvLqw2iKv+vBeI=
-			</data>
-		</dict>
-		<key>shake_begin.wav</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			rvOWr88pq4kYfOUaJjkgp8DRvG4=
-			</data>
-			<key>hash2</key>
-			<data>
-			pa5HPan6VIZClTjq2ETHlbFDt5ThQ/3o74jZKgxWT/4=
-			</data>
-		</dict>
-		<key>shake_end.wav</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/B4IoXY33CUaHB6BWiAE7YJnqus=
-			</data>
-			<key>hash2</key>
-			<data>
-			Z2a4UbGLhhjkRe4d0YTDp8QPACjpkHb7uPEsm7+4O1E=
+			V4O12Uy5V8NB9UtSIG5rqD7PgdP2PB83vMuFR77zYIM=
 			</data>
 		</dict>
 	</dict>

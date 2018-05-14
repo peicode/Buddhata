@@ -17,9 +17,10 @@
 		FC01C63A20744D44009E43B9 /* ____UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC01C63920744D44009E43B9 /* ____UITests.m */; };
 		FC01C64920744DD8009E43B9 /* PSShakeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC01C64820744DD8009E43B9 /* PSShakeViewController.m */; };
 		FC01C64D20744F1D009E43B9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC01C61920744D44009E43B9 /* ViewController.m */; };
-		FC01C65120745A54009E43B9 /* shake_begin.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC01C650207455A0009E43B9 /* shake_begin.wav */; };
-		FC01C65220745A54009E43B9 /* shake_end.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC01C64F207455A0009E43B9 /* shake_end.wav */; };
 		FC01C65520745E3E009E43B9 /* PSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC01C65420745E3D009E43B9 /* PSMenuViewController.m */; };
+		FCB5E64420A456D2007416A0 /* libFMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB5E64520A456D2007416A0 /* libFMDB.a */; };
+		FCB5E64720A456EA007416A0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB5E64620A456EA007416A0 /* libsqlite3.tbd */; };
+		FCB5E64820A47D8C007416A0 /* XWCoolAnimator+XWScanning.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57583207CE53900E51867 /* XWCoolAnimator+XWScanning.m */; };
 		FCD575A5207CE60600E51867 /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD57566207CE53900E51867 /* UIView+Snapshot.m */; };
 		FCD575A6207CE74900E51867 /* XWInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5756B207CE53900E51867 /* XWInteractiveTransition.m */; };
 		FCD575A7207CE74E00E51867 /* XWTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD5756D207CE53900E51867 /* XWTransitionAnimator.m */; };
@@ -76,10 +77,11 @@
 		FC01C63B20744D44009E43B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC01C64720744DD8009E43B9 /* PSShakeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSShakeViewController.h; sourceTree = "<group>"; };
 		FC01C64820744DD8009E43B9 /* PSShakeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSShakeViewController.m; sourceTree = "<group>"; };
-		FC01C64F207455A0009E43B9 /* shake_end.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_end.wav; sourceTree = "<group>"; };
-		FC01C650207455A0009E43B9 /* shake_begin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shake_begin.wav; sourceTree = "<group>"; };
 		FC01C65320745E3D009E43B9 /* PSMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PSMenuViewController.h; sourceTree = "<group>"; };
 		FC01C65420745E3D009E43B9 /* PSMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PSMenuViewController.m; sourceTree = "<group>"; };
+		FCB5E64320A455FB007416A0 /* libFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFMDB.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB5E64520A456D2007416A0 /* libFMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFMDB.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB5E64620A456EA007416A0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		FCD5755C207A37FE00E51867 /* Buddha.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Buddha.pch; sourceTree = "<group>"; };
 		FCD57563207CE53900E51867 /* UINavigationController+XWTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+XWTransition.h"; sourceTree = "<group>"; };
 		FCD57564207CE53900E51867 /* UINavigationController+XWTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+XWTransition.m"; sourceTree = "<group>"; };
@@ -154,6 +156,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCB5E64720A456EA007416A0 /* libsqlite3.tbd in Frameworks */,
+				FCB5E64420A456D2007416A0 /* libFMDB.a in Frameworks */,
 				258257B58B2889234DD5C97B /* libPods-佛性人生.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,6 +182,9 @@
 		874D70F55C263FC7E0FDC311 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCB5E64620A456EA007416A0 /* libsqlite3.tbd */,
+				FCB5E64520A456D2007416A0 /* libFMDB.a */,
+				FCB5E64320A455FB007416A0 /* libFMDB.a */,
 				8D64A796FF7E71399EBDAA50 /* libPods-佛性人生.a */,
 			);
 			name = Frameworks;
@@ -218,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				FCD57560207CE52100E51867 /* 转场动画 */,
-				FC01C61E20744D44009E43B9 /* Assets.xcassets */,
 				FC01C62020744D44009E43B9 /* LaunchScreen.storyboard */,
 				FC01C62320744D44009E43B9 /* Info.plist */,
 				FC01C62420744D44009E43B9 /* main.m */,
@@ -266,7 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				FCD576102096BE2B00E51867 /* comic.otf */,
-				FC01C64E20745589009E43B9 /* 音效 */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -280,18 +285,10 @@
 			path = "摇一摇";
 			sourceTree = "<group>";
 		};
-		FC01C64E20745589009E43B9 /* 音效 */ = {
-			isa = PBXGroup;
-			children = (
-				FC01C650207455A0009E43B9 /* shake_begin.wav */,
-				FC01C64F207455A0009E43B9 /* shake_end.wav */,
-			);
-			path = "音效";
-			sourceTree = "<group>";
-		};
 		FCD57560207CE52100E51867 /* 转场动画 */ = {
 			isa = PBXGroup;
 			children = (
+				FC01C61E20744D44009E43B9 /* Assets.xcassets */,
 				FCD57561207CE53900E51867 /* XWTransition */,
 			);
 			path = "转场动画";
@@ -575,8 +572,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCD576112096BEC800E51867 /* comic.otf in Resources */,
-				FC01C65120745A54009E43B9 /* shake_begin.wav in Resources */,
-				FC01C65220745A54009E43B9 /* shake_end.wav in Resources */,
 				FC01C62220744D44009E43B9 /* LaunchScreen.storyboard in Resources */,
 				FC01C61F20744D44009E43B9 /* Assets.xcassets in Resources */,
 				FC01C61D20744D44009E43B9 /* Main.storyboard in Resources */,
@@ -655,6 +650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCB5E64820A47D8C007416A0 /* XWCoolAnimator+XWScanning.m in Sources */,
 				FCD576122098395900E51867 /* UIViewController+XWTransition.m in Sources */,
 				FCD575C720883E5700E51867 /* XWCoolAnimator+XWPageFlip.m in Sources */,
 				FCD575B3207F21C100E51867 /* XWCoolAnimator+XWPortal.m in Sources */,
@@ -841,9 +837,11 @@
 				DEVELOPMENT_TEAM = 947Y58Z74K;
 				GCC_PREFIX_HEADER = "/Users/sunnypei/Desktop/佛性人生/佛性人生/Buddha.pch";
 				INFOPLIST_FILE = "佛性人生/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "p.lpz.----";
+				PRODUCT_BUNDLE_IDENTIFIER = com.budda.LPZ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -857,9 +855,11 @@
 				DEVELOPMENT_TEAM = 947Y58Z74K;
 				GCC_PREFIX_HEADER = "/Users/sunnypei/Desktop/佛性人生/佛性人生/Buddha.pch";
 				INFOPLIST_FILE = "佛性人生/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "p.lpz.----";
+				PRODUCT_BUNDLE_IDENTIFIER = com.budda.LPZ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

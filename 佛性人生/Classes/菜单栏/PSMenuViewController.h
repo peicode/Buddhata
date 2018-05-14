@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PSTransViewController.h"
-@class PSTransViewController;
+#import "PSShakeViewController.h"
+@class PSShakeViewController,PSTransViewController;
 @interface PSMenuViewController : UIViewController
 @property(nonatomic,weak)PSTransViewController *transVc;
+@property(nonatomic,weak)PSShakeViewController *shakeVc;
 @end

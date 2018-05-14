@@ -15,6 +15,9 @@
         _iconView = [[UIImageView alloc]init];
         if(SCREENW == 414){
             _iconView.frame = CGRectMake(0, 0, 369,369);
+        }else if(SCREENH == 812){
+            
+            _iconView.frame = CGRectMake(0, 0, 360,360);
         }else{
            _iconView.frame = CGRectMake(0, 0, 334,334);
         }
@@ -41,7 +44,7 @@
     //画圆 截出圆形layer
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:self.bounds];
     CAShapeLayer *pathlayer = [CAShapeLayer layer];
-    pathlayer.lineWidth = 3;
+    pathlayer.lineWidth = 2;
     pathlayer.fillColor = [UIColor colorWithRed:95/255.0 green:175/255.0 blue:246/255.0 alpha:1].CGColor;
     pathlayer.path = path.CGPath;
     self.layer.mask = pathlayer;
@@ -63,13 +66,10 @@
     //设置转动圈数
     NSInteger circleNum = 6;
     CGFloat perAngle = M_PI/180.0;
-    //    NSLog(@"perangleis------%f",perAngle);
     //核心动画
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    //KVO 监听核心动画转动多少弧度 ----test
-//    [anim addObserver:self forKeyPath:@"toValue" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    
     self.endAngle = 360*perAngle*circleNum+self.lotteryPro*perAngle;
-    //    NSLog(@"最终概率是----%f",endAngle/M_PI*180);
     anim.toValue = [NSNumber numberWithFloat:self.endAngle];
     
     anim.duration = 3.0f;
@@ -84,7 +84,7 @@
     
     //
     [self.iconView.layer addAnimation:anim forKey:@"rotation"];
-    [self.iconView.layer addObserver:self forKeyPath:@"transform" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+//    [self.iconView.layer addObserver:self forKeyPath:@"transform" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
 }
 /**
@@ -113,25 +113,8 @@
     if (self.delegete && [self.delegete respondsToSelector:@selector(sendRandomAngle:)]) {
         [self.delegete sendRandomAngle:self.lotteryPro];
     }
-    //self.turnArray = [self returnResultArray];
     [self stoprotating];
 }
 #pragma mark - KVO监听旋转角度的变化
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
-    if([keyPath isEqualToString:@"toValue"]){
-//        NSLog(@"%@--%@--is changed",object,keyPath);
-//        NSLog(@"%@",change);
-//        id newA = [change valueForKey:@"new"];
-//        NSLog(@"%@",newA);
-    }else if ([keyPath isEqualToString:@"transform"]){
-//        NSLog(@"%@",change);
-        CATransform3D *new = (__bridge CATransform3D*)[change valueForKey:@"new"];
-//        CATransform3D old = ()[change valueForKey:@"old"];
-//        NSLog(@"%f",new->m22);
-//        CATransform3DGetAffineTransform(CATransform3D t)
-    }
-}
--(void)dealloc{
-    [self.anim removeObserver:self forKeyPath:@"toValue"];
-}
+
 @end

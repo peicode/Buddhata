@@ -38,7 +38,9 @@
         [animator setValue:toInteractive forKey:@"toInteractive"];
     }
     objc_setAssociatedObject(viewController, &kXWAnimatorKey, animator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
     [self presentViewController:viewController animated:YES completion:nil];
+    
 }
 
 - (void)xw_addMagicMoveStartViewGroup:(NSArray<UIView *> *)group {

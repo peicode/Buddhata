@@ -20,25 +20,29 @@
 @end
 
 @implementation ViewController
-
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.shakeBtn = [[UIButton alloc]init];
     self.turnBtn = [[UIButton alloc]init];
     if (SCREENH == 812) {
-        NSLog(@"%f,%f,%f,%f",SCREENW ,SCREENH,PSSCREENW,PSSCREENH);
         self.shakeBtn.frame= CGRectMake(0, 0, PSSCREENW, 406) ;
         [self.shakeBtn setImage:[UIImage imageNamed:@"shakeX"] forState:UIControlStateNormal];
-        NSLog(@"%@",NSStringFromCGRect(self.shakeBtn.frame));
         self.turnBtn.frame = CGRectMake(0, 406, PSSCREENW, 406);
         [self.turnBtn setImage:[UIImage imageNamed:@"turn_ipX"] forState:UIControlStateNormal];
-        NSLog(@"%@",NSStringFromCGRect(self.turnBtn.frame));
-    }else{
+    }else if(SCREENW == 375 || SCREENW == 414){
         self.shakeBtn.frame= CGRectMake(0, 0, PSSCREENW, PSSCREENH/2) ;
         [self.shakeBtn setImage:[UIImage imageNamed:@"shake"] forState:UIControlStateNormal];
         self.turnBtn.frame = CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height/2);
         [self.turnBtn setImage:[UIImage imageNamed:@"turn"] forState:UIControlStateNormal];
-        NSLog(@"%@",NSStringFromCGRect(self.turnBtn.frame));
+    }else{
+        self.shakeBtn.frame= CGRectMake(0, 0, PSSCREENW, PSSCREENH/2) ;
+        [self.shakeBtn setBackgroundImage:[UIImage imageNamed:@"shake"] forState:UIControlStateNormal];
+//        self.shakeBtn.imageView
+        self.turnBtn.frame = CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height/2);
+        [self.turnBtn setBackgroundImage:[UIImage imageNamed:@"turn"] forState:UIControlStateNormal];
     }
     [self.view addSubview:self.shakeBtn];
     [self.view addSubview:self.turnBtn];
@@ -57,16 +61,17 @@
 - (void)shakeBtnClick:(UIButton *)sender {
     XWCoolAnimator *animator = [XWCoolAnimator xw_animatorWithType:XWCoolTransitionAnimatorTypePageMiddleFlipFromBottom];
     PSShakeViewController *shakeVc = [[PSShakeViewController alloc]init];
-    shakeVc.modalPresentationStyle = UIModalPresentationPageSheet;
-    shakeVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    shakeVc.modalPresentationStyle = UIModalPresentationPageSheet;
+//    shakeVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [self presentViewController:shakeVc animated:YES completion:nil];
     [self xw_presentViewController:shakeVc withAnimator:animator];
 }
 - (void)turnBtn:(UIButton *)sender {
     XWCoolAnimator *animator = [XWCoolAnimator xw_animatorWithType:XWCoolTransitionAnimatorTypePageMiddleFlipFromTop];
     PSTransViewController *transVc = [[PSTransViewController alloc]init];
-    transVc.modalPresentationStyle = UIModalPresentationPageSheet;
-    transVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    
+//    transVc.modalPresentationStyle = UIModalPresentationPageSheet;
+//    transVc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//
     [self xw_presentViewController:transVc withAnimator:animator];
 }
 @end

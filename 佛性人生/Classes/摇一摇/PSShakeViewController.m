@@ -27,7 +27,9 @@
 {
     FMDatabase *_database;
 }
-
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
 -(SystemSoundID)soundBeginID{
     if (_soundBeginID == 0) {
         //获取资源的URL，音频文件要放在黄色文件夹中shake_begin.wav
@@ -59,22 +61,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    //手势
+    __weak typeof(self)weakSelf = self;
+    [self xw_registerBackInteractiveTransitionWithDirection:XWInteractiveTransitionGestureDirectionDown transitonBlock:^(CGPoint startPoint) {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    } edgeSpacing:0];
     //使控制器成为第一响应者，并且可以摇动
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
     [self becomeFirstResponder];
     //设置背景以及相关组件
     [self setAllSubViews];
-//    NSArray *fontFamilies = [UIFont familyNames];
-//    for (int i = 0; i < [fontFamilies count]; i++)
-//    {
-//        NSString *fontFamily = [fontFamilies objectAtIndex:i];
-//        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
-//        NSLog (@"%@: %@", fontFamily, fontNames);
-//    }
-//    2018-04-30 11:15:53.620750+0800 佛性人生[38442:35506412] MF LiHei (Noncommercial): (
-//                                                                                    "MFLiHei_Noncommercial-Regular"
-//                                                                                    )
+    //添加label
+    [self setLabel];
 }
 - (void)setAllSubViews{
     _bgView = [[UIImageView alloc]init];
@@ -110,12 +108,12 @@
     [_backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [_bgView addSubview:_backBtn];
     [_backBtn addTarget:self action:@selector(backButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+-(void)setLabel{
     //添加Label
-    
-    
-    
     _textLab = [[UILabel alloc]init];
-//    _textLab.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    //    _textLab.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
     _textLab.textAlignment = NSTextAlignmentCenter;
     if(SCREENW == 414){
         _textLab.frame = CGRectMake(0, 104, PSSCREENW, 35);
@@ -128,18 +126,24 @@
         _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:31];
     }
     _textLab.textColor = [UIColor whiteColor];
-    _textLab.text = @"施主，请摇晃你的手机";
-    _textLab.textAlignment = NSTextAlignmentCenter;
-    [_bgView addSubview:_textLab];
+    if(self.mulArray.count == 0){
+        //提示用户要去添加
+        self.textLab.text = @"施主，请添加选项";
+    }else{
+        _textLab.text = @"施主，请摇晃你的手机";
+    }
     
+    _textLab.textAlignment = NSTextAlignmentCenter;
+//    [_bgView addSubview:_textLab];
+    [self.view addSubview:_textLab];
 }
-
 /**
  点击进入摇一摇菜单选项栏
  */
 -(void)menuBtnClick{
     XWCircleSpreadAnimator *animator = [XWCircleSpreadAnimator xw_animatorWithStartCenter:self.menuBtn.center radius:20];
     PSMenuViewController *menuVc = [[PSMenuViewController alloc]init];
+    menuVc.shakeVc = self;
     [self xw_presentViewController:menuVc withAnimator:animator];
 }
 - (void)didReceiveMemoryWarning {
@@ -211,24 +215,16 @@
         if(self.mulArray.count == 0){
             [self motionCancelled:motion withEvent:event];
             //提示用户要去添加
-            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"还没选项" message:@"快去添加吧！" preferredStyle:UIAlertControllerStyleAlert];
-            [self presentViewController:alertVc animated:YES completion:nil];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self dismissViewControllerAnimated:YES completion:nil];
-            });
+            self.textLab.text = @"施主，请添加选项";
+
             return;
         }
-        //2.添加摇动声音
-//        AudioServicesPlaySystemSound(self.soundEndID);
-        //3.显示结果
-//        _bgView.image = [UIImage imageNamed:@"bgShake"];
-//        NSLog(@"%lu",(unsigned long)self.mulArray.count);
         int count = (int)self.mulArray.count;
         int i = arc4random() % count;
-//        if(SCREENH == 812){
-            _textLab.frame = CGRectMake(0, 89, PSSCREENW, 45);
+            _textLab.frame = CGRectMake(28, 89, PSSCREENW-56, 91);
+            _textLab.numberOfLines = 0;
             _textLab.font = [UIFont fontWithName:@"MFLiHei_Noncommercial-Regular" size:45];
-//        }
+
         _textLab.text = _mulArray[i];
         //4.设置震动
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
@@ -261,5 +257,9 @@
     }
     return array;
 }
-
+-(void)refreshLabelFromShake{
+    [self.textLab removeFromSuperview];
+    self.mulArray = [self returnResultArray];
+    [self setLabel];
+}
 @end

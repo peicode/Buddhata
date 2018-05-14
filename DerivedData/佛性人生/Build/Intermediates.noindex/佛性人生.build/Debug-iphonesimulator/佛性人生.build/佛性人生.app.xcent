@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>947Y58Z74K.p.lpz.----</string>
+	<string>947Y58Z74K.com.budda.LPZ</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>947Y58Z74K.p.lpz.----</string>
+		<string>947Y58Z74K.com.budda.LPZ</string>
 	</array>
 </dict>
 </plist>

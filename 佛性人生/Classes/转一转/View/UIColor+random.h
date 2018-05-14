@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <objc/runtime.h>
 @interface UIColor (random)
-+(UIColor *)randomColor;
-+(NSMutableArray *)returnColorArray;
++(UIColor *)randomColorwith:(int)num;
 @end
