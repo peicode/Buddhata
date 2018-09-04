@@ -8,10 +8,11 @@
 
 #import "PSMenuViewController.h"
 #import "UIViewController+XWTransition.h"
-@interface PSMenuViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "PSEditViewCell.h"
+
+@interface PSMenuViewController()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)NSMutableArray *choseArray;
 @property(nonatomic,strong)UITableView *tableView;
-
 @end
 
 @implementation PSMenuViewController
@@ -62,11 +63,11 @@
     UILabel *titleLabel = [[UILabel alloc]init];
     if(SCREENH == 812){
         headView.frame = CGRectMake(0, 0, PSSCREENW, 80);
-        sureBtn.frame = CGRectMake(12, 44, 20, 24);
+        sureBtn.frame = CGRectMake(6, 44, 40, 24);
         titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 44);
     }else{
         headView.frame = CGRectMake(0, 0, PSSCREENW, 60);
-        sureBtn.frame = CGRectMake(12, 24, 20, 24);
+        sureBtn.frame = CGRectMake(6, 29, 40, 24);
         titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 24);
     }
     
@@ -84,7 +85,7 @@
     titleLabel.textColor = [UIColor whiteColor];
     
     [titleLabel sizeToFit];
-    NSLog(@"%@",NSStringFromCGRect(titleLabel.frame));
+//    NSLog(@"%@",NSStringFromCGRect(titleLabel.frame));
     [headView addSubview:titleLabel];
     //创建tableView
     _tableView = [[UITableView alloc]init];
@@ -92,10 +93,11 @@
     //去掉分割线  需要写下setSeparatorInset方法前面
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     _tableView.backgroundColor = [UIColor whiteColor];
-    _tableView.rowHeight = 60;
+//    _tableView.rowHeight = 60;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [_tableView registerNib:[UINib nibWithNibName:@"PSEditViewCell" bundle:nil] forCellReuseIdentifier: editcellID];
     [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 20, 0, 0)];
     [self.view addSubview:_tableView];
 }
@@ -137,14 +139,18 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        static NSString *cellID = @"textcell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        }
+//        static NSString *cellID = @"textcell";
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        PSEditViewCell *cell = [tableView dequeueReusableCellWithIdentifier:editcellID forIndexPath:indexPath];
+//        if (cell == nil) {
+//            cell = [[PSEditViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:editcellID];
+//
+//        }
         cell.editingAccessoryType = UITableViewCellAccessoryDetailButton;
-        cell.textLabel.text = self.choseArray[indexPath.row];
-        cell.textLabel.font = [UIFont systemFontOfSize:22];
+//        cell.textLabel.text = self.choseArray[indexPath.row];
+//        cell.textLabel.font = [UIFont systemFontOfSize:22];
+        cell.textField.text = self.choseArray[indexPath.row];
+        cell.textField.font = [UIFont systemFontOfSize:22];
         return cell;
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ab"];
@@ -177,11 +183,6 @@
         //刷新转盘
         [self.transVc refreshUILabelFormBGView];
     }
-//    else if (editingStyle == UITableViewCellEditingStyleInsert){
-//        NSArray *insertIndexPath = [NSArray arrayWithObjects:indexPath, nil];
-//        //
-////        [self.choseArray insertObje];
-//    }
     [tableView endUpdates];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -189,9 +190,12 @@
         [self addBtnClick];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }else{
+        PSEditViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell.textField becomeFirstResponder];
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
+
 #pragma mark--按钮的点击操作
 
 /**

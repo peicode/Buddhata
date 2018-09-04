@@ -10,6 +10,7 @@
 #import "PSTransViewController.h"
 #import "PSShakeViewController.h"
 @class PSShakeViewController,PSTransViewController;
+static  NSString *const editcellID = @"editCell";
 @interface PSMenuViewController : UIViewController
 @property(nonatomic,weak)PSTransViewController *transVc;
 @property(nonatomic,weak)PSShakeViewController *shakeVc;

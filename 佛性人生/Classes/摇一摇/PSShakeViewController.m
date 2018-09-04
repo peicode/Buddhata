@@ -89,10 +89,10 @@
     //菜单
     _menuBtn  = [[UIButton alloc]init];
     if (SCREENH == 812) {
-        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 44, 24, 24);
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 44, 40, 24);
     }else{
         
-        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 40, 24);
     }
     [_menuBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [_bgView addSubview:_menuBtn];
@@ -100,9 +100,9 @@
     //返回
     _backBtn = [[UIButton alloc]init];
     if (SCREENH == 812) {
-        _backBtn.frame = CGRectMake(12, 44, 14, 24);
+        _backBtn.frame = CGRectMake(6, 44, 40, 24);
     }else{
-        _backBtn.frame = CGRectMake(12, 29, 14, 24);
+        _backBtn.frame = CGRectMake(6, 29, 40, 24);
     }
     
     [_backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];

@@ -113,9 +113,9 @@
     //菜单
     _menuBtn  = [[UIButton alloc]init];
     if(SCREENH == 812){
-        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 44, 24, 24);
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 44, 40, 24);
     }else{
-        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 24, 24);
+        _menuBtn.frame = CGRectMake(self.view.frame.size.width-50, 29, 40, 24);
     }
     
     [_menuBtn setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
@@ -125,9 +125,9 @@
     //返回按钮
     UIButton *backBtn = [[UIButton alloc]init];
     if(SCREENH == 812){
-        backBtn.frame = CGRectMake(12, 44, 14, 24);
+        backBtn.frame = CGRectMake(6, 44, 40, 24);
     }else{
-        backBtn.frame = CGRectMake(12, 29, 14, 24);
+        backBtn.frame = CGRectMake(6, 29, 40, 24);
     }
 //    [backBtn setTitle:@"BACK" forState:UIControlStateNormal];
     [backBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
@@ -225,6 +225,10 @@
         return YES;
     }
 }
+#pragma mark -PSImgDelegate方法
+-(void)cumlate:(float)angle{
+    [self sendRandomAngle:angle];
+}
 /**
  这里显示结果
  */
@@ -243,7 +247,7 @@
     float a = 360.0/count;
     float d = a/2;
     float angle = angle1;
-    NSLog(@"%f",angle);
+//    NSLog(@"%f",angle);
 
     if (angle<=d || angle>=360-d) {
         self.resultLab.text = self.turnArray[0];
@@ -258,6 +262,9 @@
             self.resultLab.text = self.turnArray[count-b/2];
         }
     }
+}
+-(void)dealloc{
+    NSLog(@"PSTrans-delloc");
 }
 @end
 

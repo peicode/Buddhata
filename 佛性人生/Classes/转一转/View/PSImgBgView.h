@@ -11,6 +11,7 @@
 @optional
 -(BOOL)judgeArrayNull;
 -(void)sendRandomAngle: (float )angle;
+-(void)cumlate: (float)angle;
 @end
 @interface PSImgBgView : UIView<CAAnimationDelegate>
 @property(nonatomic,strong)UIImageView *iconView;
@@ -25,5 +26,6 @@
    随机数
  */
 @property(nonatomic,assign)float lotteryPro;
+@property(nonatomic,assign) CGFloat currentAngle;
 @property(nonatomic,weak)id<PSImgDelegate> delegete;
 @end
