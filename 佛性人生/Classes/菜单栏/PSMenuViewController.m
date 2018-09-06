@@ -10,9 +10,11 @@
 #import "UIViewController+XWTransition.h"
 #import "PSEditViewCell.h"
 
-@interface PSMenuViewController()<UITableViewDelegate,UITableViewDataSource>
+@interface PSMenuViewController()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property(nonatomic,strong)NSMutableArray *choseArray;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,copy)NSString * beginForText;
+@property(nonatomic,assign)int idForText;
 @end
 
 @implementation PSMenuViewController
@@ -146,6 +148,7 @@
 //            cell = [[PSEditViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:editcellID];
 //
 //        }
+        cell.textField.delegate = self;
         cell.editingAccessoryType = UITableViewCellAccessoryDetailButton;
 //        cell.textLabel.text = self.choseArray[indexPath.row];
 //        cell.textLabel.font = [UIFont systemFontOfSize:22];
@@ -192,14 +195,63 @@
     }else{
         PSEditViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [cell.textField becomeFirstResponder];
+        
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
 }
+#pragma mark --UITextFieldDelegate
+///这里需要获取到当前更新数据的 id ，然后根据id来更新对应字段
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    _beginForText = textField.text;
+    NSLog(@"%@",textField.text);
+    [_db open];
+    //用数组读取数据
+    FMResultSet *resultSet = [_db executeQuery:@"SELECT * FROM budda where context = ?", _beginForText];
+//    NSMutableArray *array = [NSMutableArray array];
+    
+    while ([resultSet next]) {
+//        NSUInteger a = [resultSet stringForColumn:@"id"];
+//        [array addObject:a];
+        int a = [resultSet intForColumn:@"id"];
+        NSLog(@"%d",a);
+        _idForText = a;
+    }
+    
+//    self.choseArray = array;
+//    [self.tableView reloadData];
+    [_db close];
 
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSString *str = textField.text;
+     NSLog(@"%@",textField.text);
+    NSLog(@"%d",_idForText);
+
+    if (![str isEqualToString:_beginForText]) {
+        
+    [_db open];
+    NSLog(@"%@",self.beginForText);
+    //删除对应数据
+    NSString *updateStr = [NSString stringWithFormat:@"UPDATE budda SET context = '%@' WHERE id = '%d' ",textField.text,_idForText];
+    BOOL result = [_db executeUpdate:updateStr];
+    if (result ) {
+        NSLog(@"update-success");
+    }
+    [_db close];
+    //需要刷新表格
+    [self refreshUI];
+//        [self.tableView reloadData];
+    
+    //刷新转盘
+    [self.transVc refreshUILabelFormBGView];
+    [self.shakeVc refreshLabelFromShake];
+    }
+    
+}
 #pragma mark--按钮的点击操作
 
 /**
- 保存按钮，保存tableView中的数据
+ 保存按钮，保存tableView中的数据，退出Vc
  */
 - (void)sureBtnClick{
     //需要刷新表格
@@ -290,5 +342,28 @@
         NSLog(@"delete-success");
     }
     [_db close];
+}
+- (void)saveAllData{
+//    int a =
+//    [_db open];
+//    [_db executeUpdate:@"INSERT INTO budda (context) VALUES (?);",conField.text];
+//    [_db close];
+//    //需要刷新表格
+//    [self refreshUI];
+//
+//    //刷新转盘
+//    [self.transVc refreshUILabelFormBGView];
+//    [self.shakeVc refreshLabelFromShake];
+}
+- (void)updateTextField:(UITextField *)textField WithId: (int)sender{
+//    [_db open];
+//    NSLog(@"%@",self.beginForText);
+//    //删除对应数据
+//    NSString *updateStr = [NSString stringWithFormat:@"UPDATE budda SET context = '%@' WHERE context = '%@' ",textField.text,_beginForText];
+//    BOOL result = [_db executeUpdate:updateStr];
+//    if (result ) {
+//        NSLog(@"update-success");
+//    }
+//    [_db close];
 }
 @end

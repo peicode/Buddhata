@@ -64,18 +64,18 @@
     _btnView.userInteractionEnabled = NO;
     //概率 创造一个随机数（0，360）arc4random()%360
     self.lotteryPro = arc4random()%360;
-    NSLog(@"随机数是%f",self.lotteryPro);
+//    NSLog(@"随机数是%f",self.lotteryPro);
     //设置转动圈数
     NSInteger circleNum = 6;
     //角度转弧度
     CGFloat perAngle = M_PI/180.0;
-    NSLog(@"随机数产生的弧度是%f",_lotteryPro*perAngle);
+//    NSLog(@"随机数产生的弧度是%f",_lotteryPro*perAngle);
     //核心动画
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
     //结束时的弧度
     self.endAngle = 360*perAngle*circleNum+self.lotteryPro*perAngle;
     anim.toValue = [NSNumber numberWithFloat:self.endAngle];
-    NSLog(@"animation.toValue%@",anim.toValue);
+//    NSLog(@"animation.toValue%@",anim.toValue);
     anim.duration = 3.0f;
     anim.delegate = self;
     //慢-快-慢
@@ -141,7 +141,7 @@
         if (angles < 0 ){
             angles = 360 + angles;
         }
-        NSLog(@"------%f",angles);
+//        NSLog(@"------%f",angles);
 //        }
         if (self.delegete && [self.delegete respondsToSelector:@selector(cumlate:)]) {
             [self.delegete cumlate:angles];
