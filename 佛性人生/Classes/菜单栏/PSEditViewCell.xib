@@ -31,7 +31,7 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="1ES-zs-1PX" secondAttribute="trailing" constant="16" id="6Mq-6P-LSg"/>
+                    <constraint firstAttribute="trailing" secondItem="1ES-zs-1PX" secondAttribute="trailing" priority="999" constant="16" id="6Mq-6P-LSg"/>
                     <constraint firstItem="1ES-zs-1PX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="8fu-xz-etD"/>
                     <constraint firstItem="1ES-zs-1PX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="tGf-ll-Iul"/>
                 </constraints>

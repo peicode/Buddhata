@@ -276,6 +276,7 @@
 		FC01C64B20744DEB009E43B9 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				FC01C61E20744D44009E43B9 /* Assets.xcassets */,
 				FCD576102096BE2B00E51867 /* comic.otf */,
 			);
 			path = Others;
@@ -293,7 +294,6 @@
 		FCD57560207CE52100E51867 /* 转场动画 */ = {
 			isa = PBXGroup;
 			children = (
-				FC01C61E20744D44009E43B9 /* Assets.xcassets */,
 				FCD57561207CE53900E51867 /* XWTransition */,
 			);
 			path = "转场动画";

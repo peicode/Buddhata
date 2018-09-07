@@ -95,7 +95,7 @@
     //去掉分割线  需要写下setSeparatorInset方法前面
     _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     _tableView.backgroundColor = [UIColor whiteColor];
-//    _tableView.rowHeight = 60;
+    _tableView.rowHeight = 40;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -157,8 +157,9 @@
         return cell;
     }else{
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ab"];
-        cell.imageView.image = [UIImage imageNamed:@"add"];
+        cell.imageView.image = [UIImage imageNamed:@"add3"];
         cell.textLabel.text = @"添加新选项";
+        cell.textLabel.textColor = [UIColor colorWithRed:73/255.0 green:150/255.0 blue:210/255.0 alpha:1.0];
         return cell;
     }
     
@@ -343,27 +344,5 @@
     }
     [_db close];
 }
-- (void)saveAllData{
-//    int a =
-//    [_db open];
-//    [_db executeUpdate:@"INSERT INTO budda (context) VALUES (?);",conField.text];
-//    [_db close];
-//    //需要刷新表格
-//    [self refreshUI];
-//
-//    //刷新转盘
-//    [self.transVc refreshUILabelFormBGView];
-//    [self.shakeVc refreshLabelFromShake];
-}
-- (void)updateTextField:(UITextField *)textField WithId: (int)sender{
-//    [_db open];
-//    NSLog(@"%@",self.beginForText);
-//    //删除对应数据
-//    NSString *updateStr = [NSString stringWithFormat:@"UPDATE budda SET context = '%@' WHERE context = '%@' ",textField.text,_beginForText];
-//    BOOL result = [_db executeUpdate:updateStr];
-//    if (result ) {
-//        NSLog(@"update-success");
-//    }
-//    [_db close];
-}
+
 @end
