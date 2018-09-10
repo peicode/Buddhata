@@ -62,13 +62,16 @@
 - (void)setNavgaView{
     UIView *headView = [[UIView alloc]init];
     UIButton *sureBtn = [[UIButton alloc]init];
+    UIButton *gradeBtn = [[UIButton alloc]init];
     UILabel *titleLabel = [[UILabel alloc]init];
     if(SCREENH == 812){
         headView.frame = CGRectMake(0, 0, PSSCREENW, 80);
         sureBtn.frame = CGRectMake(6, 44, 40, 24);
+        gradeBtn.frame = CGRectMake(PSSCREENW - 46, 44, 40, 30);
         titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 44);
     }else{
         headView.frame = CGRectMake(0, 0, PSSCREENW, 60);
+        gradeBtn.frame = CGRectMake(PSSCREENW - 46, 29, 40, 30);
         sureBtn.frame = CGRectMake(6, 29, 40, 24);
         titleLabel.center = CGPointMake(PSSCREENW/2 - 44, 24);
     }
@@ -77,9 +80,12 @@
     [self.view addSubview:headView];
     
     [headView addSubview:sureBtn];
+    [headView addSubview:gradeBtn];
+    
     [sureBtn setImage:[UIImage imageNamed:@"back1"] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    
+    [gradeBtn setImage:[UIImage imageNamed:@"grade"] forState:UIControlStateNormal];
+    [gradeBtn addTarget:self action:@selector(gradeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     
     titleLabel.font = [UIFont fontWithName:@"PingFang SC" size:22];
@@ -141,17 +147,10 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-//        static NSString *cellID = @"textcell";
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         PSEditViewCell *cell = [tableView dequeueReusableCellWithIdentifier:editcellID forIndexPath:indexPath];
-//        if (cell == nil) {
-//            cell = [[PSEditViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:editcellID];
-//
-//        }
+
         cell.textField.delegate = self;
         cell.editingAccessoryType = UITableViewCellAccessoryDetailButton;
-//        cell.textLabel.text = self.choseArray[indexPath.row];
-//        cell.textLabel.font = [UIFont systemFontOfSize:22];
         cell.textField.text = self.choseArray[indexPath.row];
         cell.textField.font = [UIFont systemFontOfSize:22];
         return cell;
@@ -227,7 +226,7 @@
     NSString *str = textField.text;
      NSLog(@"%@",textField.text);
     NSLog(@"%d",_idForText);
-
+    
     if (![str isEqualToString:_beginForText]) {
         
     [_db open];
@@ -246,8 +245,9 @@
     //刷新转盘
     [self.transVc refreshUILabelFormBGView];
     [self.shakeVc refreshLabelFromShake];
+    }else{
+        return;
     }
-    
 }
 #pragma mark--按钮的点击操作
 
@@ -277,7 +277,16 @@
     //退出界面
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+- (void)gradeBtnClick{
+    NSString *urlStr = [NSString
+                        
+                        stringWithFormat:@"https://itunes.apple.com/us/app/itunes-u/id%@?action=write-review&mt=8",
+                        
+                        @1383233970];
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+    
+}
 /**
  添加数据
  1.暂时只做一个界面
